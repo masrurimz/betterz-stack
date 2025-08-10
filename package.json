@@ -19,7 +19,7 @@
     "db:watch": "turbo -F web db:watch",
     "db:stop": "turbo -F web db:stop",
     "db:down": "turbo -F web db:down",
-    "clean": "turbo clean"
+    "clean": "turbo clean && rm -rf node_modules"
   },
   "dependencies": {},
   "devDependencies": {
@@ -28,10 +28,6 @@
     "ultracite": "5.1.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2"
-  },
-  "overrides": {
-    "react": "19.1.1",
-    "react-dom": "19.1.1"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,jsonc,css,scss,md,mdx}": [
