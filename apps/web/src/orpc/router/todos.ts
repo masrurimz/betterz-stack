@@ -1,20 +1,38 @@
-import { os } from '@orpc/server';
-import * as z from 'zod';
+import { eq } from 'drizzle-orm'
+import * as z from 'zod'
+import { todo } from '@/db/schema/todo'
+import { publicProcedure } from '@/lib/orpc'
 
-const todos = [
-  { id: 1, name: 'Get groceries' },
-  { id: 2, name: 'Buy a new phone' },
-  { id: 3, name: 'Finish the project' },
-];
+export const listTodos = publicProcedure.handler(async ({ context }) => {
+  return await context.db.select().from(todo)
+})
 
-export const listTodos = os.input(z.object({})).handler(() => {
-  return todos;
-});
+export const addTodo = publicProcedure
+  .input(z.object({ text: z.string().min(1) }))
+  .handler(async ({ input, context }) => {
+    const [newTodo] = await context.db
+      .insert(todo)
+      .values({
+        text: input.text,
+      })
+      .returning()
+    return newTodo
+  })
 
-export const addTodo = os
-  .input(z.object({ name: z.string() }))
-  .handler(({ input }) => {
-    const newTodo = { id: todos.length + 1, name: input.name };
-    todos.push(newTodo);
-    return newTodo;
-  });
+export const toggleTodo = publicProcedure
+  .input(z.object({ id: z.number(), completed: z.boolean() }))
+  .handler(async ({ input, context }) => {
+    const [updatedTodo] = await context.db
+      .update(todo)
+      .set({ completed: input.completed })
+      .where(eq(todo.id, input.id))
+      .returning()
+    return updatedTodo
+  })
+
+export const deleteTodo = publicProcedure
+  .input(z.object({ id: z.number() }))
+  .handler(async ({ input, context }) => {
+    await context.db.delete(todo).where(eq(todo.id, input.id))
+    return { success: true }
+  })

@@ -22,6 +22,7 @@ import { ServerRoute as ApiDemoTqTodosServerRouteImport } from './routes/api.dem
 import { ServerRoute as ApiDemoNamesServerRouteImport } from './routes/api.demo-names'
 import { ServerRoute as ApiSplatServerRouteImport } from './routes/api.$'
 import { ServerRoute as ApiRpcSplatServerRouteImport } from './routes/api.rpc.$'
+import { ServerRoute as ApiAuthSplatServerRouteImport } from './routes/api.auth.$'
 
 const rootServerRouteImport = createServerRootRoute()
 
@@ -78,6 +79,11 @@ const ApiSplatServerRoute = ApiSplatServerRouteImport.update({
 const ApiRpcSplatServerRoute = ApiRpcSplatServerRouteImport.update({
   id: '/api/rpc/$',
   path: '/api/rpc/$',
+  getParentRoute: () => rootServerRouteImport,
+} as any)
+const ApiAuthSplatServerRoute = ApiAuthSplatServerRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
   getParentRoute: () => rootServerRouteImport,
 } as any)
 
@@ -152,12 +158,14 @@ export interface FileServerRoutesByFullPath {
   '/api/$': typeof ApiSplatServerRoute
   '/api/demo-names': typeof ApiDemoNamesServerRoute
   '/api/demo-tq-todos': typeof ApiDemoTqTodosServerRoute
+  '/api/auth/$': typeof ApiAuthSplatServerRoute
   '/api/rpc/$': typeof ApiRpcSplatServerRoute
 }
 export interface FileServerRoutesByTo {
   '/api/$': typeof ApiSplatServerRoute
   '/api/demo-names': typeof ApiDemoNamesServerRoute
   '/api/demo-tq-todos': typeof ApiDemoTqTodosServerRoute
+  '/api/auth/$': typeof ApiAuthSplatServerRoute
   '/api/rpc/$': typeof ApiRpcSplatServerRoute
 }
 export interface FileServerRoutesById {
@@ -165,18 +173,30 @@ export interface FileServerRoutesById {
   '/api/$': typeof ApiSplatServerRoute
   '/api/demo-names': typeof ApiDemoNamesServerRoute
   '/api/demo-tq-todos': typeof ApiDemoTqTodosServerRoute
+  '/api/auth/$': typeof ApiAuthSplatServerRoute
   '/api/rpc/$': typeof ApiRpcSplatServerRoute
 }
 export interface FileServerRouteTypes {
   fileServerRoutesByFullPath: FileServerRoutesByFullPath
-  fullPaths: '/api/$' | '/api/demo-names' | '/api/demo-tq-todos' | '/api/rpc/$'
+  fullPaths:
+    | '/api/$'
+    | '/api/demo-names'
+    | '/api/demo-tq-todos'
+    | '/api/auth/$'
+    | '/api/rpc/$'
   fileServerRoutesByTo: FileServerRoutesByTo
-  to: '/api/$' | '/api/demo-names' | '/api/demo-tq-todos' | '/api/rpc/$'
+  to:
+    | '/api/$'
+    | '/api/demo-names'
+    | '/api/demo-tq-todos'
+    | '/api/auth/$'
+    | '/api/rpc/$'
   id:
     | '__root__'
     | '/api/$'
     | '/api/demo-names'
     | '/api/demo-tq-todos'
+    | '/api/auth/$'
     | '/api/rpc/$'
   fileServerRoutesById: FileServerRoutesById
 }
@@ -184,6 +204,7 @@ export interface RootServerRouteChildren {
   ApiSplatServerRoute: typeof ApiSplatServerRoute
   ApiDemoNamesServerRoute: typeof ApiDemoNamesServerRoute
   ApiDemoTqTodosServerRoute: typeof ApiDemoTqTodosServerRoute
+  ApiAuthSplatServerRoute: typeof ApiAuthSplatServerRoute
   ApiRpcSplatServerRoute: typeof ApiRpcSplatServerRoute
 }
 
@@ -270,6 +291,13 @@ declare module '@tanstack/react-start/server' {
       preLoaderRoute: typeof ApiRpcSplatServerRouteImport
       parentRoute: typeof rootServerRouteImport
     }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatServerRouteImport
+      parentRoute: typeof rootServerRouteImport
+    }
   }
 }
 
@@ -289,6 +317,7 @@ const rootServerRouteChildren: RootServerRouteChildren = {
   ApiSplatServerRoute: ApiSplatServerRoute,
   ApiDemoNamesServerRoute: ApiDemoNamesServerRoute,
   ApiDemoTqTodosServerRoute: ApiDemoTqTodosServerRoute,
+  ApiAuthSplatServerRoute: ApiAuthSplatServerRoute,
   ApiRpcSplatServerRoute: ApiRpcSplatServerRoute,
 }
 export const serverRouteTree = rootServerRouteImport

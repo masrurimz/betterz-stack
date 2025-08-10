@@ -4,6 +4,10 @@ import { z } from 'zod';
 export const env = createEnv({
   server: {
     SERVER_URL: z.string().url().optional(),
+    DATABASE_URL: z.string().url(),
+    BETTER_AUTH_SECRET: z.string().min(32),
+    BETTER_AUTH_URL: z.string().url().optional(),
+    CORS_ORIGIN: z.string().optional(),
   },
 
   /**

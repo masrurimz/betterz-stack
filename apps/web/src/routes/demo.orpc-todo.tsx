@@ -8,7 +8,7 @@ export const Route = createFileRoute('/demo/orpc-todo')({
   component: ORPCTodos,
   loader: async ({ context }) => {
     await context.queryClient.prefetchQuery(
-      orpc.listTodos.queryOptions({
+      orpc.todo.getAll.queryOptions({
         input: {},
       })
     );
@@ -17,14 +17,14 @@ export const Route = createFileRoute('/demo/orpc-todo')({
 
 function ORPCTodos() {
   const { data, refetch } = useQuery(
-    orpc.listTodos.queryOptions({
+    orpc.todo.getAll.queryOptions({
       input: {},
     })
   );
 
   const [todo, setTodo] = useState('');
   const { mutate: addTodo } = useMutation({
-    mutationFn: orpc.addTodo.call,
+    mutationFn: orpc.todo.create.call,
     onSuccess: () => {
       refetch();
       setTodo('');
@@ -32,7 +32,7 @@ function ORPCTodos() {
   });
 
   const submitTodo = useCallback(() => {
-    addTodo({ name: todo });
+    addTodo({ text: todo });
   }, [addTodo, todo]);
 
   return (
@@ -51,7 +51,7 @@ function ORPCTodos() {
               className="rounded-lg border border-white/20 bg-white/10 p-3 shadow-md backdrop-blur-sm"
               key={t.id}
             >
-              <span className="text-lg text-white">{t.name}</span>
+              <span className="text-lg text-white">{t.text}</span>
             </li>
           ))}
         </ul>
