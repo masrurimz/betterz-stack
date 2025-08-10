@@ -8,6 +8,7 @@ import { ZodToJsonSchemaConverter } from '@orpc/zod/zod4';
 import { createServerFileRoute } from '@tanstack/react-start/server';
 import router from '@/orpc/router';
 import { TodoSchema } from '@/orpc/schema';
+import { createContext } from '@/lib/context';
 
 const handler = new OpenAPIHandler(router, {
   interceptors: [
@@ -54,9 +55,11 @@ const handler = new OpenAPIHandler(router, {
 });
 
 async function handle({ request }: { request: Request }) {
+  const context = await createContext({ request });
+  
   const { response } = await handler.handle(request, {
     prefix: '/api',
-    context: {},
+    context,
   });
 
   return response ?? new Response('Not Found', { status: 404 });

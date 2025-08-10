@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { useCallback, useState } from 'react';
 
@@ -16,20 +16,24 @@ export const Route = createFileRoute('/demo/orpc-todo')({
 });
 
 function ORPCTodos() {
-  const { data, refetch } = useQuery(
+  const queryClient = useQueryClient();
+  const { data } = useQuery(
     orpc.todo.getAll.queryOptions({
       input: {},
     })
   );
 
   const [todo, setTodo] = useState('');
-  const { mutate: addTodo } = useMutation({
-    mutationFn: orpc.todo.create.call,
-    onSuccess: () => {
-      refetch();
-      setTodo('');
-    },
-  });
+  const { mutate: addTodo } = useMutation(
+    orpc.todo.create.mutationOptions({
+      onSuccess: () => {
+        setTodo('');
+        queryClient.invalidateQueries({
+          queryKey: orpc.todo.getAll.key(),
+        });
+      },
+    })
+  );
 
   const submitTodo = useCallback(() => {
     addTodo({ text: todo });
