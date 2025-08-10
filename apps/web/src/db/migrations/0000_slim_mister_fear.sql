@@ -47,7 +47,7 @@ CREATE TABLE "verification" (
 );
 --> statement-breakpoint
 CREATE TABLE "todo" (
-	"id" serial PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT '34a2362e-3ee6-48d4-b6b3-59594b338084' NOT NULL,
 	"text" text NOT NULL,
 	"completed" boolean DEFAULT false NOT NULL
 );

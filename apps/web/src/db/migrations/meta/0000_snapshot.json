@@ -1,5 +1,5 @@
 {
-  "id": "e99470be-ae7b-4376-ba7c-4282688bcd40",
+  "id": "8cf7c688-6798-42d5-9163-a900db7a22e4",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -310,9 +310,10 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "'34a2362e-3ee6-48d4-b6b3-59594b338084'"
         },
         "text": {
           "name": "text",

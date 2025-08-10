@@ -1,0 +1,17 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-01-10 10:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: id\n"
+
+msgid "Add todo"
+msgstr "Tambah tugas"
+
+msgid "Enter a new todo..."
+msgstr "Masukkan tugas baru..."
+
+msgid "oRPC Todos list"
+msgstr "Daftar Tugas oRPC"

@@ -7,7 +7,7 @@ import { orpc } from '@/orpc/client';
 export const Route = createFileRoute('/demo/orpc-todo')({
   component: ORPCTodos,
   loader: async ({ context }) => {
-    await context.queryClient.prefetchQuery(
+    await context.queryClient.ensureQueryData(
       orpc.todo.getAll.queryOptions({
         input: {},
       })
