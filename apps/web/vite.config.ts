@@ -15,6 +15,7 @@ export default defineConfig({
     tailwindcss(),
     tanstackStart({
       customViteReactPlugin: true,
+      target: 'bun',
     }),
     react(),
   ],

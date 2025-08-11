@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "bunx --bun vite dev",
-    "start": "bun .output/server/index.mjs",
+    "start": "bun run .output/server/index.mjs",
     "build": "bunx --bun vite build",
     "serve": "bunx --bun vite preview",
     "test": "vitest run",
