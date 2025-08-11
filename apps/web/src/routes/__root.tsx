@@ -1,3 +1,4 @@
+import type { I18n } from '@lingui/core';
 import type { QueryClient } from '@tanstack/react-query';
 import {
   createRootRouteWithContext,
@@ -6,12 +7,13 @@ import {
   Scripts,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
-import Header from '../components/Header';
+import Header from '../components/header';
 import TanStackQueryLayout from '../integrations/tanstack-query/layout.tsx';
 import appCss from '../styles.css?url';
 
 interface MyRouterContext {
   queryClient: QueryClient;
+  i18n: I18n;
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
@@ -40,8 +42,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 });
 
 function RootDocument() {
+  const { i18n } = Route.useRouteContext();
+
   return (
-    <html lang="en">
+    <html lang={i18n.locale}>
+      {/** biome-ignore lint/style/noHeadElement: need for TanStack Start */}
       <head>
         <HeadContent />
       </head>
