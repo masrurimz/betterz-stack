@@ -13,7 +13,7 @@ export const createRouter = ({ i18n }: { i18n: I18n }) => {
   const router = routerWithLingui(
     createTanstackRouter({
       routeTree,
-      context: { queryClient: rqContext.queryClient, i18n },
+      context: { queryClient: rqContext.queryClient, i18n, user: null },
       defaultPreload: 'intent',
     }),
     i18n

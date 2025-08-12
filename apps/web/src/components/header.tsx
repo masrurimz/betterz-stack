@@ -1,12 +1,11 @@
-import { Link, useRouterState } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 import LanguageSwitcher from '@/components/language-switcher';
 import { Button } from '@/components/ui/button';
 import authClient from '@/lib/auth/auth-client';
+import { Route } from '@/routes/__root';
 
 export default function Header() {
-  const routerState = useRouterState();
-  const user =
-    routerState.location.state?.user || routerState.matches?.[0]?.context?.user;
+  const { user } = Route.useRouteContext();
 
   const handleSignOut = () => {
     authClient.signOut({

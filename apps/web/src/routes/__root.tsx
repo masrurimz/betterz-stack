@@ -14,10 +14,13 @@ import { orpc } from '../lib/orpc/client';
 import TanStackQueryLayout from '../lib/tanstack-query/layout';
 import appCss from '../styles/globals.css?url';
 
+type Session = Awaited<ReturnType<typeof orpc.auth.getSession.call>>;
+type User = Session extends { user: infer U } ? U : null;
+
 interface MyRouterContext {
   queryClient: QueryClient;
   i18n: I18n;
-  user: Awaited<ReturnType<typeof orpc.auth.getSession>>['user'];
+  user: User;
 }
 
 const rootSearchSchema = z.object({

@@ -18,9 +18,10 @@ export const Route = createFileRoute('/dashboard')({
     if (!context.user) {
       throw redirect({
         to: '/auth/login',
-        search: {
+        search: (prev) => ({
+          ...prev,
           redirect: '/dashboard',
-        },
+        }),
       });
     }
   },
