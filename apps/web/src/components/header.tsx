@@ -27,13 +27,6 @@ export default function Header() {
           <Link to="/">Home</Link>
         </div>
 
-        <div className="px-2 font-bold">
-          <Link to="/demo/start/server-funcs">Start - Server Functions</Link>
-        </div>
-
-        <div className="px-2 font-bold">
-          <Link to="/demo/start/api-request">Start - API Request</Link>
-        </div>
 
         <div className="px-2 font-bold">
           <Link to="/demo/orpc-todo">oRPC Todo</Link>
@@ -47,9 +40,6 @@ export default function Header() {
           <Link to="/demo/form/address">Address Form</Link>
         </div>
 
-        <div className="px-2 font-bold">
-          <Link to="/demo/tanstack-query">TanStack Query</Link>
-        </div>
       </nav>
 
       <div className="flex items-center gap-2">
