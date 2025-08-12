@@ -1,0 +1,17 @@
+pre-commit:
+  jobs:
+    - run: npx ultracite format
+      glob: 
+        - "*.js"
+        - "*.jsx"
+        - "*.ts"
+        - "*.tsx"
+        - "*.json"
+        - "*.jsonc"
+        - "*.css"
+      stage_fixed: true
+    - run: bun run check-types
+      glob: "*.{ts,tsx}"
+    - run: cd apps/web && bun run lingui:compile
+      glob: "**/_locales/*.po"
+      stage_fixed: true
