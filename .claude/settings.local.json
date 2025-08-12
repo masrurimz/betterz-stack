@@ -4,7 +4,9 @@
       "WebFetch(domain:github.com)",
       "Bash(bun pm ls:*)",
       "Bash(cat:*)",
-      "WebFetch(domain:tanstack.com)"
+      "WebFetch(domain:tanstack.com)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__get-library-docs"
     ],
     "deny": []
   }
