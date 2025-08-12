@@ -4,9 +4,12 @@ import {
   createRootRouteWithContext,
   HeadContent,
   Outlet,
+  retainSearchParams,
   Scripts,
+  useSearch,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+import { z } from 'zod';
 import Header from '../components/header';
 import { orpc } from '../lib/orpc/client';
 import TanStackQueryLayout from '../lib/tanstack-query/layout';
@@ -18,7 +21,17 @@ interface MyRouterContext {
   user: Awaited<ReturnType<typeof orpc.auth.getSession>>['user'];
 }
 
+const rootSearchSchema = z.object({
+  locale: z
+    .string()
+    .optional()
+    .refine((val) => !val || ['en', 'id'].includes(val), {
+      message: "Invalid locale",
+    }),
+});
+
 export const Route = createRootRouteWithContext<MyRouterContext>()({
+  validateSearch: rootSearchSchema,
   beforeLoad: async ({ context }) => {
     /**
      * Load user session using unified oRPC architecture
@@ -56,6 +69,10 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
     ],
   }),
+
+  search: {
+    middlewares: [retainSearchParams(["locale"])],
+  },
 
   shellComponent: RootDocument,
 });

@@ -1,3 +1,5 @@
+import { useLingui } from '@lingui/react/macro';
+import { Trans } from '@lingui/react/macro';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Plus } from 'lucide-react';
 import { useCallback, useState } from 'react';
@@ -8,6 +10,8 @@ import { orpc } from '@/lib/orpc/client';
 export function TodoForm() {
   const [todo, setTodo] = useState('');
   const queryClient = useQueryClient();
+  const { t } = useLingui();
+  
 
   const { mutate: createTodo } = useMutation(
     orpc.todo.create.mutationOptions({
@@ -36,7 +40,7 @@ export function TodoForm() {
             submitTodo();
           }
         }}
-        placeholder="Enter a new todo..."
+        placeholder={t`Enter a new todo...`}
         type="text"
         value={todo}
       />
@@ -46,7 +50,7 @@ export function TodoForm() {
         onClick={submitTodo}
       >
         <Plus className="mr-1 h-4 w-4" />
-        Add
+        <Trans>Add</Trans>
       </Button>
     </div>
   );

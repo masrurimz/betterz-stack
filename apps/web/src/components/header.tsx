@@ -1,6 +1,7 @@
 import { Link, useRouterState } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
 import authClient from '@/lib/auth/auth-client';
+import LanguageSwitcher from '@/components/language-switcher';
 
 export default function Header() {
   const routerState = useRouterState();
@@ -39,6 +40,7 @@ export default function Header() {
       </nav>
 
       <div className="flex items-center gap-2">
+        <LanguageSwitcher />
         {user ? (
           <>
             <Link to="/dashboard">

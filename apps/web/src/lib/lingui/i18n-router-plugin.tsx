@@ -37,10 +37,12 @@ export function routerWithLingui<TRouter extends AnyRouter>(
     hydrate: (dehydrated) => {
       ogOptions.hydrate?.(dehydrated);
       // On the client, hydrate the i18n catalog with the dehydrated data
-      i18n.loadAndActivate({
-        locale: dehydrated.dehydratedI18n.locale,
-        messages: dehydrated.dehydratedI18n.messages,
-      });
+      if (dehydrated?.dehydratedI18n) {
+        i18n.loadAndActivate({
+          locale: dehydrated.dehydratedI18n.locale,
+          messages: dehydrated.dehydratedI18n.messages,
+        });
+      }
     },
     context: {
       ...ogOptions.context,

@@ -51,6 +51,54 @@ pnpx shadcn@latest add button
 ```
 
 
+## Internationalization (i18n)
+
+This project uses [Lingui](https://lingui.dev/) for internationalization with feature-first translation structure.
+
+### Available Languages
+- English (default)
+- Indonesian (`?locale=id`)
+
+### Usage Patterns
+
+**Components:**
+```tsx
+import { useLingui } from '@lingui/react/macro';
+import { Trans } from '@lingui/react/macro';
+
+function MyComponent() {
+  const { t } = useLingui();
+  
+  return (
+    <div>
+      <input placeholder={t`Enter text...`} />
+      <button><Trans>Submit</Trans></button>
+    </div>
+  );
+}
+```
+
+**Root/Layout:**
+```tsx
+import { useLingui } from '@lingui/react';
+
+function RootLayout() {
+  const { i18n } = useLingui();
+  return <html lang={i18n.locale}>...</html>;
+}
+```
+
+### Commands
+```bash
+bun run lingui:extract  # Extract translatable strings
+bun run lingui:compile  # Compile translations
+```
+
+### Adding Translations
+1. Add strings using `t\`message\`` or `<Trans>message</Trans>`
+2. Run `bun run lingui:extract` to update `.po` files
+3. Translate in `src/locales/{locale}/messages.po`
+
 ## T3Env
 
 - You can use T3Env to add type safety to your environment variables.

@@ -12,6 +12,7 @@ export default requestHandler(async (ctx) => {
   const locale = getLocaleFromRequest();
   const i18n = setupI18n({});
 
+  // Load translations for the detected locale
   await dynamicActivate(i18n, locale);
 
   const startHandler = createStartHandler({

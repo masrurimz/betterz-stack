@@ -45,6 +45,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# i18n - Generated translation files
+src/locales/**/*.js
+src/locales/**/*.mjs
+src/app/**/_locales/*.js
+src/app/**/_locales/*.mjs
+
 # IDE
 .vscode/*
 !.vscode/extensions.json

@@ -1,5 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Check, Trash2 } from 'lucide-react';
+import { useLingui } from '@lingui/react/macro';
+import { Trans } from '@lingui/react/macro';
 import type { Todo } from '@/app/todos/_domain/todo-entity';
 import { Button } from '@/components/ui/button';
 import { orpc } from '@/lib/orpc/client';
@@ -10,6 +12,7 @@ interface TodoItemProps {
 
 function TodoItem({ todo }: TodoItemProps) {
   const queryClient = useQueryClient();
+  const { t } = useLingui();
 
   const { mutate: toggleTodo, isPending: isToggling } = useMutation(
     orpc.todo.toggle.mutationOptions({
@@ -77,7 +80,7 @@ function TodoItem({ todo }: TodoItemProps) {
 
       {(isToggling || isDeleting) && (
         <div className="mt-2 text-white/60 text-xs">
-          {isToggling ? 'Updating...' : 'Deleting...'}
+          {isToggling ? t`Updating...` : t`Deleting...`}
         </div>
       )}
     </li>
@@ -93,14 +96,16 @@ export function TodoList() {
 
   if (isLoading) {
     return (
-      <div className="mb-4 text-center text-white/60">Loading todos...</div>
+      <div className="mb-4 text-center text-white/60">
+        <Trans>Loading todos...</Trans>
+      </div>
     );
   }
 
   if (!todos || todos.length === 0) {
     return (
       <div className="mb-4 text-center text-white/60">
-        No todos yet. Add one above!
+        <Trans>No todos yet. Add one above!</Trans>
       </div>
     );
   }

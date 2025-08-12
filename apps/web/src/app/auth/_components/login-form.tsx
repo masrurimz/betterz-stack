@@ -2,6 +2,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { GalleryVerticalEnd, LoaderCircle } from 'lucide-react';
 import { useState } from 'react';
+import { useLingui } from '@lingui/react/macro';
+import { Trans } from '@lingui/react/macro';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -14,6 +16,7 @@ interface LoginFormProps {
 export function LoginForm({ redirectUrl = '/' }: LoginFormProps) {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { t } = useLingui();
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -76,26 +79,28 @@ export function LoginForm({ redirectUrl = '/' }: LoginFormProps) {
             <div className="flex h-8 w-8 items-center justify-center rounded-md">
               <GalleryVerticalEnd className="size-6" />
             </div>
-            <h1 className="font-bold text-xl">Welcome back to Betterz Stack</h1>
+            <h1 className="font-bold text-xl">
+              <Trans>Welcome back to Betterz Stack</Trans>
+            </h1>
           </div>
           <div className="flex flex-col gap-5">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email"><Trans>Email</Trans></Label>
               <Input
                 id="email"
                 name="email"
-                placeholder="hello@example.com"
+                placeholder={t`hello@example.com`}
                 readOnly={isLoading}
                 required
                 type="email"
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password"><Trans>Password</Trans></Label>
               <Input
                 id="password"
                 name="password"
-                placeholder="Enter password here"
+                placeholder={t`Enter password here`}
                 readOnly={isLoading}
                 required
                 type="password"
@@ -108,7 +113,7 @@ export function LoginForm({ redirectUrl = '/' }: LoginFormProps) {
               type="submit"
             >
               {isLoading && <LoaderCircle className="animate-spin" />}
-              {isLoading ? 'Logging in...' : 'Login'}
+              {isLoading ? t`Logging in...` : t`Login`}
             </Button>
           </div>
           {errorMessage && (
@@ -118,7 +123,7 @@ export function LoginForm({ redirectUrl = '/' }: LoginFormProps) {
           )}
           <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-border after:border-t">
             <span className="relative z-10 bg-background px-2 text-muted-foreground">
-              Or
+              <Trans>Or</Trans>
             </span>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -139,7 +144,7 @@ export function LoginForm({ redirectUrl = '/' }: LoginFormProps) {
                   fill="currentColor"
                 />
               </svg>
-              Login with GitHub
+              <Trans>Login with GitHub</Trans>
             </Button>
             <Button
               className="w-full"
@@ -158,17 +163,19 @@ export function LoginForm({ redirectUrl = '/' }: LoginFormProps) {
                   fill="currentColor"
                 />
               </svg>
-              Login with Google
+              <Trans>Login with Google</Trans>
             </Button>
           </div>
         </div>
       </form>
 
       <div className="text-center text-sm">
-        Don&apos;t have an account?{' '}
-        <Link className="underline underline-offset-4" to="/auth/signup">
-          Sign up
-        </Link>
+        <Trans>
+          Don't have an account?{' '}
+          <Link className="underline underline-offset-4" to="/auth/signup">
+            Sign up
+          </Link>
+        </Trans>
       </div>
     </div>
   );

@@ -382,6 +382,57 @@ CMD ["bun", "start"]
 
 ## 🎨 Customization
 
+### 🌐 Internationalization (i18n)
+
+**Feature-First Translation Structure:**
+```
+src/app/
+├── auth/_locales/          # Auth feature translations
+│   ├── en.po
+│   └── id.po  
+├── todos/_locales/         # Todos feature translations
+│   ├── en.po
+│   └── id.po
+└── locales/               # Global translations
+    ├── en/messages.po
+    └── id/messages.po
+```
+
+**Translation Commands:**
+```bash
+# Extract translatable strings
+bun run lingui:extract
+
+# Compile translations for production
+bun run lingui:compile  
+
+# Extract and compile in one command
+bun run lingui:dev
+```
+
+**Generated Files:**
+- `.po` files are committed to git (source translations)
+- `.js/.mjs` files are ignored by git (compiled translations)
+- Compilation happens automatically during build process
+
+**Adding Translations to Routes:**
+```typescript
+// apps/web/src/routes/auth/login.tsx
+import { loadRouteTranslations } from '@/lib/lingui/route-translations';
+
+export const Route = createFileRoute('/auth/login')({
+  beforeLoad: async ({ context }) => {
+    // Load feature translations
+    await loadRouteTranslations(context, ['auth']);
+  },
+  component: LoginPage,
+});
+```
+
+**Supported Locales:**
+- `en` - English (default)
+- `id` - Indonesian
+
 ### UI Theme & Styling
 
 ```bash
