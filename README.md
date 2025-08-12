@@ -36,6 +36,12 @@ A modern, type-safe, and scalable foundation for building full-stack application
 - **Testable Code** - Easy unit and integration testing
 - **Scalable Patterns** - From MVP to enterprise-scale applications
 
+### 🌐 **Internationalization (i18n)**
+- **Lingui Integration** - Type-safe, feature-first translations
+- **Feature-Prefixed Files** - Self-documenting translation structure
+- **Auto-Discovery** - Parallel catalog loading with zero configuration
+- **Built-in Language Switcher** - URL parameter persistence and smooth switching
+
 ### 🛠️ **Developer Experience**
 - **Turborepo Monorepo** - Optimized build system and caching
 - **TypeScript** - Full type safety across the entire stack
@@ -273,13 +279,20 @@ bun lint          # Lint with Biome
 bun format        # Format with Biome
 ```
 
+### Translation Commands (from apps/web/)
+```bash
+bun lingui:extract    # Extract translatable strings from code
+bun lingui:compile    # Compile translations for production
+bun lingui:dev        # Extract and compile (development)
+```
+
 ## 🛠️ Development Workflow
 
 ### Adding a New Feature
 
 1. **Create feature module** following Clean Architecture:
 ```bash
-mkdir -p apps/web/src/app/posts/{_api,_domain,_components}
+mkdir -p apps/web/src/app/posts/{_api,_domain,_components,_locales}
 ```
 
 2. **Define domain entities** in `_domain/`:
@@ -312,12 +325,42 @@ export default {
 };
 ```
 
-5. **Create UI components** in `_components/`:
+5. **Set up feature translations**:
+```bash
+# Update Lingui configuration
+# Add posts catalog to lingui.config.ts catalogs array:
+{
+  path: '<rootDir>/src/app/posts/_locales/posts-{locale}',
+  include: ['src/app/posts/**'],
+  exclude: ['**/node_modules/**'],
+}
+
+# Update import paths in src/lib/lingui/i18n.ts:
+() => import('../../app/posts/_locales/posts-${locale}.po')
+
+# Extract translations to generate files
+bun run lingui:extract
+```
+
+6. **Create UI components** in `_components/`:
 ```typescript
 // apps/web/src/app/posts/_components/post-list.tsx
+import { useLingui } from '@lingui/react/macro';
+
 export function PostList() {
+  const { t } = useLingui();
   const { data: posts } = useQuery(orpc.posts.getAll.queryOptions({}));
-  // ... component implementation
+  
+  if (!posts?.length) {
+    return <p>{t`No posts found`}</p>;
+  }
+  
+  return (
+    <div>
+      <h2>{t`Posts`}</h2>
+      {/* ... component implementation */}
+    </div>
+  );
 }
 ```
 
@@ -384,54 +427,74 @@ CMD ["bun", "start"]
 
 ### 🌐 Internationalization (i18n)
 
-**Feature-First Translation Structure:**
+Built with **Lingui** for type-safe, feature-first internationalization that scales with your application.
+
+**Feature-Prefixed Translation Structure:**
 ```
-src/app/
-├── auth/_locales/          # Auth feature translations
-│   ├── en.po
-│   └── id.po  
-├── todos/_locales/         # Todos feature translations
-│   ├── en.po
-│   └── id.po
-└── locales/               # Global translations
-    ├── en/messages.po
-    └── id/messages.po
+src/
+├── locales/                # Global translations
+│   ├── global-en.po        # Global English translations
+│   └── global-id.po        # Global Indonesian translations
+└── app/
+    ├── auth/_locales/      # Auth feature translations
+    │   ├── auth-en.po      # Auth English translations
+    │   └── auth-id.po      # Auth Indonesian translations
+    └── todos/_locales/     # Todos feature translations
+        ├── todos-en.po     # Todos English translations
+        └── todos-id.po     # Todos Indonesian translations
 ```
+
+**Key Benefits:**
+- **Self-documenting**: File names immediately show feature and locale
+- **No naming conflicts**: Impossible collisions between features
+- **Scalable**: Easy to add new features with predictable naming
+- **Auto-discovery**: Automatically loads all catalogs in parallel
 
 **Translation Commands:**
 ```bash
-# Extract translatable strings
+# Extract translatable strings from code
 bun run lingui:extract
 
-# Compile translations for production
-bun run lingui:compile  
+# Compile translations for production  
+bun run lingui:compile
 
 # Extract and compile in one command
 bun run lingui:dev
 ```
 
-**Generated Files:**
-- `.po` files are committed to git (source translations)
-- `.js/.mjs` files are ignored by git (compiled translations)
-- Compilation happens automatically during build process
+**File Types:**
+- **`.po` files** - Source translations (committed to git)
+- **`.js/.mjs` files** - Compiled translations (ignored by git, auto-generated)
 
-**Adding Translations to Routes:**
+**Using Translations in Components:**
 ```typescript
-// apps/web/src/routes/auth/login.tsx
-import { loadRouteTranslations } from '@/lib/lingui/route-translations';
+// Import translation macro
+import { useLingui } from '@lingui/react/macro';
 
-export const Route = createFileRoute('/auth/login')({
-  beforeLoad: async ({ context }) => {
-    // Load feature translations
-    await loadRouteTranslations(context, ['auth']);
-  },
-  component: LoginPage,
-});
+export function LoginForm() {
+  const { t } = useLingui();
+  
+  return (
+    <button>{t`Login`}</button>  // ✅ Correct usage
+  );
+}
 ```
 
+**Language Switching:**
+- Built-in language switcher in header navigation
+- URL parameter persistence (`?locale=en` or `?locale=id`)
+- Automatic translation loading and router invalidation
+
 **Supported Locales:**
-- `en` - English (default)
-- `id` - Indonesian
+- **`en`** - English (default/source locale)
+- **`id`** - Indonesian
+
+**Adding New Features:**
+1. Create `_locales/` folder in your feature directory
+2. Add feature-prefixed translation files (e.g., `posts-en.po`, `posts-id.po`)
+3. Update `lingui.config.ts` catalog paths
+4. Update `src/lib/lingui/i18n.ts` import paths
+5. Run `bun run lingui:extract` to generate translation files
 
 ### UI Theme & Styling
 
