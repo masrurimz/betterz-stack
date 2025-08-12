@@ -56,7 +56,7 @@ Make sure you have the following installed:
 ### 1. Clone & Install
 
 ```bash
-git clone https://github.com/your-username/betterz-stack-template.git
+git clone https://github.com/masrurimz/betterz-stack-template.git
 cd betterz-stack-template
 bun install
 ```
@@ -229,12 +229,17 @@ bun db:down       # Remove container & data
 
 ```typescript
 // apps/web/src/lib/db/schema/posts.ts
+import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { user } from './auth';
+import { generateUUID } from './utils';
+
 export const posts = pgTable('posts', {
-  id: text('id').primaryKey().$defaultFn(() => generateId()),
+  id: uuid('id').primaryKey().$defaultFn(generateUUID),
   title: text('title').notNull(),
   content: text('content'),
-  userId: text('user_id').references(() => user.id),
-  createdAt: timestamp('created_at').defaultNow(),
+  userId: uuid('user_id').references(() => user.id).notNull(),
+  createdAt: timestamp('created_at').$defaultFn(() => new Date()).notNull(),
+  updatedAt: timestamp('updated_at').$defaultFn(() => new Date()).notNull(),
 });
 ```
 
@@ -329,7 +334,11 @@ export function PostList() {
 ### Production Build
 
 ```bash
+# Build the application
 bun run build
+
+# Start production server
+bun run start
 ```
 
 ### Environment Variables
@@ -469,8 +478,8 @@ kill -9 $(lsof -ti:3000)
 
 ### Getting Help
 
-- **Issues**: [GitHub Issues](https://github.com/your-username/betterz-stack-template/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/betterz-stack-template/discussions)
+- **Issues**: [GitHub Issues](https://github.com/masrurimz/betterz-stack-template/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/masrurimz/betterz-stack-template/discussions)
 - **Documentation**: Check individual tool docs linked in each section
 
 ## 📚 Learn More
@@ -484,7 +493,7 @@ kill -9 $(lsof -ti:3000)
 
 ## 📄 License
 
-MIT © [Your Name](https://github.com/your-username)
+MIT © [Muhammad Zahid Masruri](https://github.com/masrurimz)
 
 ---
 
@@ -492,6 +501,6 @@ MIT © [Your Name](https://github.com/your-username)
 
 **⭐ Star this repo if it helped you build something awesome!**
 
-[Report Bug](https://github.com/your-username/betterz-stack-template/issues) · [Request Feature](https://github.com/your-username/betterz-stack-template/issues) · [Contribute](https://github.com/your-username/betterz-stack-template/pulls)
+[Report Bug](https://github.com/masrurimz/betterz-stack-template/issues) · [Request Feature](https://github.com/masrurimz/betterz-stack-template/issues) · [Contribute](https://github.com/masrurimz/betterz-stack-template/pulls)
 
 </div>
