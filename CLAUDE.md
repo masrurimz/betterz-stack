@@ -7,37 +7,108 @@ This is a my-better-t-app-2 project created with Better-T-Stack CLI.
 
 ## Project Structure
 
-This is a monorepo with the following structure:
+This is a full-stack TanStack Start application with the following structure:
 
-
-- **`apps/server/`** - Backend server (Hono)
+- **`apps/web/`** - Full-stack application (TanStack Start + oRPC)
+- **`apps/fumadocs/`** - Documentation site (Fumadocs)
 
 
 ## Available Scripts
 
-- `bun run dev` - Start all apps in development mode
-- `bun run dev:server` - Start only the server
+- `bun run dev` - Start the full-stack application in development mode
+- `bun run dev:web` - Start only the web application
+- `bun run dev:fumadocs` - Start only the documentation site
 
 ## Database Commands
 
-All database operations should be run from the server workspace:
+All database operations should be run from the web workspace:
 
 - `bun run db:push` - Push schema changes to database
 - `bun run db:studio` - Open database studio
 - `bun run db:generate` - Generate Drizzle files
 - `bun run db:migrate` - Run database migrations
 
-Database schema files are located in `apps/server/src/db/schema/`
+Database schema files are located in `apps/web/src/lib/db/schema/`
 
 ## API Structure
 
-- oRPC endpoints are in `apps/server/src/api/`
-- Client-side API utils are in `apps/web/src/utils/api.ts`
+- oRPC procedures are in feature `_api/` folders (e.g., `apps/web/src/app/auth/_api/`)
+- oRPC router is in `apps/web/src/orpc/router.ts`
+- Client-side oRPC client is in `apps/web/src/orpc/client.ts`
 
 ## Authentication
 
 Authentication is enabled in this project:
-- Server auth logic is in `apps/server/src/lib/auth.ts`
+- Auth configuration is in `apps/web/src/lib/auth.ts`
+- Auth feature module is in `apps/web/src/app/auth/`
+
+## Architecture Guidelines
+
+This project follows Clean Architecture principles with feature-based organization:
+
+### Layer Definitions
+
+- **`_api/`** - Application Layer (use cases, business operations)
+- **`_domain/`** - Domain Layer (business rules, entities, validation)
+- **`_components/`** - Presentation Layer (UI components)
+- **`_hooks/`** - Presentation Layer (state management)
+- **`lib/`** - Infrastructure Layer (external services, database)
+
+### Folder Structure Rules
+
+- **Root level**: No underscores (`lib/`, `components/`, `hooks/`, `app/`)
+- **Feature layers**: Underscores (`_api/`, `_domain/`, `_components/`, `_hooks/`)
+- **Sub-features**: No underscores (`signin/`, `signout/`, `categories/`)
+- **Sub-feature layers**: Underscores (`signin/_api/`, `signin/_components/`)
+
+### Feature Organization Principles
+
+1. **Start local**: Keep shared code within features first (`auth/_domain/`)
+2. **Extract when needed**: Move to cross-feature only when actually shared (`app/shared/`)
+3. **High cohesion**: Related code that changes together stays together
+4. **Clear dependencies**: Presentation → Application → Domain ← Infrastructure
+
+### Example Structure
+
+```
+src/app/
+├── auth/
+│   ├── _api/           # Login, signup, logout procedures
+│   ├── _domain/        # Auth validation, user entity, password rules
+│   ├── _components/    # LoginForm, SignupForm components
+│   ├── _hooks/         # useAuth, useSession hooks
+│   ├── signin/         # Sub-feature
+│   │   ├── _api/       # Social login procedures
+│   │   └── _components/ # SocialButtons component
+│   └── signout/        # Sub-feature
+│       ├── _api/       # Logout all sessions
+│       └── _components/ # LogoutButton component
+└── todos/
+    ├── _api/           # CRUD procedures
+    ├── _domain/        # Todo entity, validation
+    ├── _components/    # TodoList, TodoForm
+    └── _hooks/         # useTodos hook
+```
+
+### Import Patterns
+
+```typescript
+// Infrastructure layer
+import { db } from '@/lib/db'
+import { Button } from '@/components/ui/button'
+
+// Cross-feature domain
+import { checkPermissions } from '@/app/shared/permissions'
+
+// Feature layers
+import { loginUser } from '@/app/auth/_api/login'
+import { validateEmail } from '@/app/auth/_domain/validation'
+import { LoginForm } from '@/app/auth/_components/LoginForm'
+import { useAuth } from '@/app/auth/_hooks/use-auth'
+
+// Sub-features
+import { GoogleLogin } from '@/app/auth/signin/_components/GoogleLogin'
+```
 
 ## Adding More Features
 

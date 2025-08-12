@@ -29,7 +29,7 @@ bun install
 This project uses PostgreSQL with Drizzle ORM.
 
 1. Make sure you have a PostgreSQL database set up.
-2. Update your `apps/server/.env` file with your PostgreSQL connection details.
+2. Update your `apps/web/.env` file with your PostgreSQL connection details.
 
 3. Apply the schema to your database:
 ```bash
@@ -43,8 +43,7 @@ Then, run the development server:
 bun dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001) in your browser to see the web application.
-The API is running at [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the full-stack application.
 
 
 
@@ -53,16 +52,78 @@ The API is running at [http://localhost:3000](http://localhost:3000).
 ```
 my-better-t-app-2/
 ├── apps/
-│   ├── web/         # Frontend application (React + TanStack Start)
-│   └── server/      # Backend API (Hono, ORPC)
+│   └── web/         # Full-stack application (TanStack Start + oRPC)
+│       └── src/
+│           ├── app/             # Feature modules
+│           │   ├── auth/
+│           │   │   ├── _api/           # Application layer (use cases)
+│           │   │   ├── _domain/        # Domain layer (business rules)
+│           │   │   ├── _components/    # Presentation layer (UI)
+│           │   │   ├── _hooks/         # Presentation layer (state)
+│           │   │   └── signin/         # Sub-features
+│           │   └── todos/
+│           │       ├── _api/
+│           │       ├── _domain/
+│           │       ├── _components/
+│           │       └── _hooks/
+│           ├── lib/             # Infrastructure layer
+│           ├── components/      # Shared UI components
+│           ├── hooks/           # Shared hooks
+│           └── routes/          # TanStack Start file-based routing
+├── docs/            # Documentation (Fumadocs)
+└── public/          # Static assets
 ```
 
 ## Available Scripts
 
-- `bun dev`: Start all applications in development mode
-- `bun build`: Build all applications
-- `bun dev:web`: Start only the web application
-- `bun dev:server`: Start only the server
-- `bun check-types`: Check TypeScript types across all apps
+- `bun dev`: Start the full-stack application in development mode
+- `bun build`: Build the application
+- `bun check-types`: Check TypeScript types
 - `bun db:push`: Push schema changes to database
 - `bun db:studio`: Open database studio UI
+- `bun db:generate`: Generate Drizzle files
+- `bun db:migrate`: Run database migrations
+
+## Clean Architecture Structure
+
+This project follows Clean Architecture principles with feature-based organization:
+
+### Layer Organization
+
+- **Root Level** (no underscores): Global utilities and shared components
+  - `lib/` - Infrastructure layer (database, external services)
+  - `components/` - Shared UI components
+  - `hooks/` - Shared React hooks
+
+- **Feature Layers** (with underscores): Architectural layers within features
+  - `_api/` - Application layer (use cases, business operations)
+  - `_domain/` - Domain layer (business rules, entities, validation)
+  - `_components/` - Presentation layer (UI components)
+  - `_hooks/` - Presentation layer (state management)
+
+- **Sub-features** (no underscores): Nested features within main features
+  - `signin/`, `signout/` under `auth/`
+  - `categories/` under `todos/`
+
+### Import Patterns
+
+```typescript
+// Global utilities
+import { db } from '@/lib/db'
+import { Button } from '@/components/ui/button'
+
+// Feature layers
+import { loginUser } from '@/app/auth/_api/login'
+import { validatePassword } from '@/app/auth/_domain/validation'
+import { LoginForm } from '@/app/auth/_components/LoginForm'
+
+// Sub-features
+import { SocialLogin } from '@/app/auth/signin/_components/SocialLogin'
+```
+
+### Guidelines
+
+1. **Start local**: Keep shared code within features first (`auth/_domain/`)
+2. **Extract when needed**: Move to cross-feature only when actually shared (`app/shared/`)
+3. **Clear dependencies**: Presentation → Application → Domain ← Infrastructure
+4. **High cohesion**: Related code stays together within features
