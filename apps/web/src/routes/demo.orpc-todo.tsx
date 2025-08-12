@@ -3,7 +3,6 @@ import { createFileRoute } from '@tanstack/react-router';
 import { orpc } from '@/orpc/client';
 import { TodoList } from '@/app/todos/_components/todo-list';
 import { TodoForm } from '@/app/todos/_components/todo-form';
-import { useTodos } from '@/app/todos/_hooks/use-todos';
 
 export const Route = createFileRoute('/demo/orpc-todo')({
   component: ORPCTodos,
@@ -17,8 +16,6 @@ export const Route = createFileRoute('/demo/orpc-todo')({
 });
 
 function ORPCTodos() {
-  const { todos, createTodo } = useTodos();
-
   return (
     <div
       className="flex min-h-screen items-center justify-center bg-gradient-to-br from-purple-100 to-blue-100 p-4 text-white"
@@ -29,8 +26,8 @@ function ORPCTodos() {
     >
       <div className="w-full max-w-2xl rounded-xl border-8 border-black/10 bg-black/50 p-8 shadow-xl backdrop-blur-md">
         <h1 className="mb-4 text-2xl">oRPC Todos list</h1>
-        <TodoList todos={todos} />
-        <TodoForm onSubmit={(text) => createTodo({ text })} />
+        <TodoList />
+        <TodoForm />
       </div>
     </div>
   );

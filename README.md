@@ -59,16 +59,14 @@ my-better-t-app-2/
 │           │   │   ├── _api/           # Application layer (use cases)
 │           │   │   ├── _domain/        # Domain layer (business rules)
 │           │   │   ├── _components/    # Presentation layer (UI)
-│           │   │   ├── _hooks/         # Presentation layer (state)
 │           │   │   └── signin/         # Sub-features
 │           │   └── todos/
 │           │       ├── _api/
 │           │       ├── _domain/
-│           │       ├── _components/
-│           │       └── _hooks/
+│           │       └── _components/
 │           ├── lib/             # Infrastructure layer
 │           ├── components/      # Shared UI components
-│           ├── hooks/           # Shared hooks
+│           ├── hooks/           # Shared React hooks
 │           └── routes/          # TanStack Start file-based routing
 ├── docs/            # Documentation (Fumadocs)
 └── public/          # Static assets
@@ -98,8 +96,7 @@ This project follows Clean Architecture principles with feature-based organizati
 - **Feature Layers** (with underscores): Architectural layers within features
   - `_api/` - Application layer (use cases, business operations)
   - `_domain/` - Domain layer (business rules, entities, validation)
-  - `_components/` - Presentation layer (UI components)
-  - `_hooks/` - Presentation layer (state management)
+  - `_components/` - Presentation layer (UI components with direct oRPC calls)
 
 - **Sub-features** (no underscores): Nested features within main features
   - `signin/`, `signout/` under `auth/`
@@ -115,10 +112,10 @@ import { Button } from '@/components/ui/button'
 // Feature layers
 import { loginUser } from '@/app/auth/_api/login'
 import { validatePassword } from '@/app/auth/_domain/validation'
-import { LoginForm } from '@/app/auth/_components/LoginForm'
+import { LoginForm } from '@/app/auth/_components/login-form'
 
 // Sub-features
-import { SocialLogin } from '@/app/auth/signin/_components/SocialLogin'
+import { SocialLogin } from '@/app/auth/signin/_components/social-login'
 ```
 
 ### Guidelines

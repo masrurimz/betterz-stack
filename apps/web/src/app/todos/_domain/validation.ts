@@ -1,7 +1,10 @@
 import * as z from 'zod';
 
 export const createTodoSchema = z.object({
-  text: z.string().min(1, 'Todo text is required').max(500, 'Todo text too long'),
+  text: z
+    .string()
+    .min(1, 'Todo text is required')
+    .max(500, 'Todo text too long'),
 });
 
 export const updateTodoSchema = z.object({

@@ -1,10 +1,13 @@
-import type { Todo } from '@/app/todos/_domain/todo-entity';
+import { useQuery } from '@tanstack/react-query';
+import { orpc } from '@/orpc/client';
 
-interface TodoListProps {
-  todos?: Todo[];
-}
+export function TodoList() {
+  const { data: todos } = useQuery(
+    orpc.todo.getAll.queryOptions({
+      input: {},
+    })
+  );
 
-export function TodoList({ todos }: TodoListProps) {
   return (
     <ul className="mb-4 space-y-2">
       {todos?.map((todo) => (

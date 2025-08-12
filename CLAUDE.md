@@ -50,14 +50,13 @@ This project follows Clean Architecture principles with feature-based organizati
 
 - **`_api/`** - Application Layer (use cases, business operations)
 - **`_domain/`** - Domain Layer (business rules, entities, validation)
-- **`_components/`** - Presentation Layer (UI components)
-- **`_hooks/`** - Presentation Layer (state management)
+- **`_components/`** - Presentation Layer (UI components with direct oRPC calls)
 - **`lib/`** - Infrastructure Layer (external services, database)
 
 ### Folder Structure Rules
 
 - **Root level**: No underscores (`lib/`, `components/`, `hooks/`, `app/`)
-- **Feature layers**: Underscores (`_api/`, `_domain/`, `_components/`, `_hooks/`)
+- **Feature layers**: Underscores (`_api/`, `_domain/`, `_components/`)
 - **Sub-features**: No underscores (`signin/`, `signout/`, `categories/`)
 - **Sub-feature layers**: Underscores (`signin/_api/`, `signin/_components/`)
 
@@ -75,19 +74,17 @@ src/app/
 ├── auth/
 │   ├── _api/           # Login, signup, logout procedures
 │   ├── _domain/        # Auth validation, user entity, password rules
-│   ├── _components/    # LoginForm, SignupForm components
-│   ├── _hooks/         # useAuth, useSession hooks
+│   ├── _components/    # login-form, signup-form components
 │   ├── signin/         # Sub-feature
 │   │   ├── _api/       # Social login procedures
-│   │   └── _components/ # SocialButtons component
+│   │   └── _components/ # social-buttons component
 │   └── signout/        # Sub-feature
 │       ├── _api/       # Logout all sessions
-│       └── _components/ # LogoutButton component
+│       └── _components/ # logout-button component
 └── todos/
     ├── _api/           # CRUD procedures
     ├── _domain/        # Todo entity, validation
-    ├── _components/    # TodoList, TodoForm
-    └── _hooks/         # useTodos hook
+    └── _components/    # todo-list, todo-form (with direct oRPC calls)
 ```
 
 ### Import Patterns
@@ -103,11 +100,10 @@ import { checkPermissions } from '@/app/shared/permissions'
 // Feature layers
 import { loginUser } from '@/app/auth/_api/login'
 import { validateEmail } from '@/app/auth/_domain/validation'
-import { LoginForm } from '@/app/auth/_components/LoginForm'
-import { useAuth } from '@/app/auth/_hooks/use-auth'
+import { LoginForm } from '@/app/auth/_components/login-form'
 
 // Sub-features
-import { GoogleLogin } from '@/app/auth/signin/_components/GoogleLogin'
+import { GoogleLogin } from '@/app/auth/signin/_components/google-login'
 ```
 
 ## Adding More Features
