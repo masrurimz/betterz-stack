@@ -1,5 +1,8 @@
-import { addTodo, listTodos, toggleTodo, deleteTodo } from './todos'
-import { publicProcedure, protectedProcedure } from '@/lib/orpc'
+import { getTodos } from '@/app/todos/_api/get-todos';
+import { createTodo } from '@/app/todos/_api/create-todo';
+import { toggleTodo } from '@/app/todos/_api/toggle-todo';
+import { deleteTodo } from '@/app/todos/_api/delete-todo';
+import { publicProcedure, protectedProcedure } from '@/lib/orpc';
 
 export default {
   healthCheck: publicProcedure.handler(() => {
@@ -12,8 +15,8 @@ export default {
     };
   }),
   todo: {
-    getAll: listTodos,
-    create: addTodo,
+    getAll: getTodos,
+    create: createTodo,
     toggle: toggleTodo,
     delete: deleteTodo,
   },
