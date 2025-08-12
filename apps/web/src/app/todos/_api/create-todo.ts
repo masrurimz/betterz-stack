@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { todo } from '@/db/schema/todo';
+import { todo } from '@/lib/db/schema/todo';
 import { publicProcedure } from '@/lib/orpc';
 
 export const createTodo = publicProcedure

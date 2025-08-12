@@ -3,7 +3,7 @@ import { Plus } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { orpc } from '@/orpc/client';
+import { orpc } from '@/lib/orpc/client';
 
 export function TodoForm() {
   const [todo, setTodo] = useState('');

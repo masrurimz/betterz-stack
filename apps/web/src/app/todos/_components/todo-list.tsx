@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Check, Trash2 } from 'lucide-react';
 import type { Todo } from '@/app/todos/_domain/todo-entity';
 import { Button } from '@/components/ui/button';
-import { orpc } from '@/orpc/client';
+import { orpc } from '@/lib/orpc/client';
 
 interface TodoItemProps {
   todo: Todo;
