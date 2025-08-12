@@ -10,6 +10,9 @@
       "Bash(grep:*)",
       "Bash(bun run:*)"
     ],
-    "deny": []
+    "deny": [],
+    "additionalDirectories": [
+      "/Users/masrurimz/Projects/labs/tanstarter/"
+    ]
   }
 }
