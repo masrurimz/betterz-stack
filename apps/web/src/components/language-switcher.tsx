@@ -31,12 +31,12 @@ export default function LanguageSwitcher() {
     // Follow official TanStack Start + Lingui pattern
     // 1. Update i18n immediately for instant feedback
     await dynamicActivate(i18n, locale);
-    
+
     // 2. Update search params for persistence
     await navigate({
       search: (prev) => ({ ...prev, locale }),
     });
-    
+
     // 3. Invalidate router to refresh all cached data
     await router.invalidate();
   };

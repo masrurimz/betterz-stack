@@ -15,7 +15,7 @@ const getAuthConfig = serverOnly(() =>
       schema: {
         user,
         session,
-        account, 
+        account,
         verification,
       },
     }),

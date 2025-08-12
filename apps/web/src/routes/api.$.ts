@@ -56,7 +56,7 @@ const handler = new OpenAPIHandler(router, {
 
 async function handle({ request }: { request: Request }) {
   const context = await createContext({ request });
-  
+
   const { response } = await handler.handle(request, {
     prefix: '/api',
     context,

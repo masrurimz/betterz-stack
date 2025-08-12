@@ -22,14 +22,14 @@ export function getClientLocale(): string {
     if (urlLocale && isLocaleValid(urlLocale)) {
       return urlLocale;
     }
-    
+
     // Could add localStorage check here in the future
     // const storedLocale = localStorage.getItem('locale');
     // if (storedLocale && isLocaleValid(storedLocale)) {
     //   return storedLocale;
     // }
   }
-  
+
   return defaultLocale;
 }
 
@@ -60,7 +60,7 @@ export async function dynamicActivate(i18n: I18n, locale: string) {
   });
 
   const allCatalogs = await Promise.all(catalogPromises);
-  
+
   // Merge all catalogs into single messages object
   const mergedMessages = allCatalogs.reduce((acc, messages) => {
     return { ...acc, ...messages };

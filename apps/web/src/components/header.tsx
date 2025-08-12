@@ -5,7 +5,8 @@ import LanguageSwitcher from '@/components/language-switcher';
 
 export default function Header() {
   const routerState = useRouterState();
-  const user = routerState.location.state?.user || routerState.matches?.[0]?.context?.user;
+  const user =
+    routerState.location.state?.user || routerState.matches?.[0]?.context?.user;
 
   const handleSignOut = () => {
     authClient.signOut({
@@ -24,7 +25,6 @@ export default function Header() {
           <Link to="/">Home</Link>
         </div>
 
-
         <div className="px-2 font-bold">
           <Link to="/demo/orpc-todo">oRPC Todo</Link>
         </div>
@@ -36,7 +36,6 @@ export default function Header() {
         <div className="px-2 font-bold">
           <Link to="/demo/form/address">Address Form</Link>
         </div>
-
       </nav>
 
       <div className="flex items-center gap-2">

@@ -26,7 +26,7 @@ const rootSearchSchema = z.object({
     .string()
     .optional()
     .refine((val) => !val || ['en', 'id'].includes(val), {
-      message: "Invalid locale",
+      message: 'Invalid locale',
     }),
 });
 
@@ -71,7 +71,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   }),
 
   search: {
-    middlewares: [retainSearchParams(["locale"])],
+    middlewares: [retainSearchParams(['locale'])],
   },
 
   shellComponent: RootDocument,

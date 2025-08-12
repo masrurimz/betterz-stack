@@ -1,7 +1,13 @@
 import { createFileRoute, Link, redirect } from '@tanstack/react-router';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { orpc } from '@/lib/orpc/client';
@@ -60,9 +66,7 @@ function DashboardPage() {
           <Badge variant="outline" className="mb-4">
             Protected Route
           </Badge>
-          <h1 className="mb-2 text-4xl font-bold text-slate-900">
-            Dashboard
-          </h1>
+          <h1 className="mb-2 text-4xl font-bold text-slate-900">Dashboard</h1>
           <p className="text-xl text-slate-600">
             Welcome back, {user.name}! 👋
           </p>
@@ -88,12 +92,14 @@ function DashboardPage() {
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm font-medium">User ID:</span>
-                <span className="text-sm text-slate-600 font-mono">{user.id}</span>
+                <span className="text-sm text-slate-600 font-mono">
+                  {user.id}
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm font-medium">Email Verified:</span>
-                <Badge variant={user.emailVerified ? "default" : "secondary"}>
-                  {user.emailVerified ? "Verified" : "Not Verified"}
+                <Badge variant={user.emailVerified ? 'default' : 'secondary'}>
+                  {user.emailVerified ? 'Verified' : 'Not Verified'}
                 </Badge>
               </div>
             </div>
@@ -113,11 +119,15 @@ function DashboardPage() {
               <div className="space-y-4">
                 <div className="rounded-lg bg-slate-100 p-4">
                   <p className="text-sm font-medium mb-2">Server Message:</p>
-                  <p className="text-sm text-slate-600">{privateData.message}</p>
+                  <p className="text-sm text-slate-600">
+                    {privateData.message}
+                  </p>
                 </div>
                 <div className="text-xs text-slate-500">
                   This data is only accessible to authenticated users via the{' '}
-                  <code className="rounded bg-slate-200 px-1">protectedProcedure</code>
+                  <code className="rounded bg-slate-200 px-1">
+                    protectedProcedure
+                  </code>
                 </div>
               </div>
             </CardContent>
@@ -128,9 +138,7 @@ function DashboardPage() {
         <Card className="mx-auto max-w-2xl">
           <CardHeader>
             <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>
-              Explore the application features
-            </CardDescription>
+            <CardDescription>Explore the application features</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -159,9 +167,7 @@ function DashboardPage() {
         {/* Back to Home */}
         <div className="mt-8 text-center">
           <Link to="/">
-            <Button variant="ghost">
-              ← Back to Home
-            </Button>
+            <Button variant="ghost">← Back to Home</Button>
           </Link>
         </div>
       </div>

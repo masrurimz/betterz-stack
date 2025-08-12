@@ -1,10 +1,10 @@
-import '@/polyfill'
+import '@/polyfill';
 
-import { createServerFileRoute } from '@tanstack/react-start/server'
-import { auth } from '@/lib/auth'
+import { createServerFileRoute } from '@tanstack/react-start/server';
+import { auth } from '@/lib/auth';
 
 async function handle({ request }: { request: Request }) {
-  return auth.handler(request)
+  return auth.handler(request);
 }
 
 export const ServerRoute = createServerFileRoute('/api/auth/$').methods({
@@ -14,4 +14,4 @@ export const ServerRoute = createServerFileRoute('/api/auth/$').methods({
   PUT: handle,
   PATCH: handle,
   DELETE: handle,
-})
+});

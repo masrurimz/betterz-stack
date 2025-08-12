@@ -11,7 +11,6 @@ export function TodoForm() {
   const [todo, setTodo] = useState('');
   const queryClient = useQueryClient();
   const { t } = useLingui();
-  
 
   const { mutate: createTodo } = useMutation(
     orpc.todo.create.mutationOptions({

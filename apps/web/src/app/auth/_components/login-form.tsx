@@ -85,7 +85,9 @@ export function LoginForm({ redirectUrl = '/' }: LoginFormProps) {
           </div>
           <div className="flex flex-col gap-5">
             <div className="grid gap-2">
-              <Label htmlFor="email"><Trans>Email</Trans></Label>
+              <Label htmlFor="email">
+                <Trans>Email</Trans>
+              </Label>
               <Input
                 id="email"
                 name="email"
@@ -96,7 +98,9 @@ export function LoginForm({ redirectUrl = '/' }: LoginFormProps) {
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="password"><Trans>Password</Trans></Label>
+              <Label htmlFor="password">
+                <Trans>Password</Trans>
+              </Label>
               <Input
                 id="password"
                 name="password"

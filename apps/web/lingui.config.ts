@@ -10,10 +10,7 @@ export default defineConfig({
     // Global translations (header, common UI, shared components)
     {
       path: '<rootDir>/src/locales/global-{locale}',
-      include: [
-        'src/components/**',
-        'src/routes/**',
-      ],
+      include: ['src/components/**', 'src/routes/**'],
       exclude: [
         '**/node_modules/**',
         'src/app/**', // Exclude app features - they have their own catalogs

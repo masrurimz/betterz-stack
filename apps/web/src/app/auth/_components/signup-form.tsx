@@ -87,7 +87,9 @@ export function SignupForm({ redirectUrl = '/' }: SignupFormProps) {
           </div>
           <div className="flex flex-col gap-5">
             <div className="grid gap-2">
-              <Label htmlFor="name"><Trans>Name</Trans></Label>
+              <Label htmlFor="name">
+                <Trans>Name</Trans>
+              </Label>
               <Input
                 id="name"
                 name="name"
@@ -98,7 +100,9 @@ export function SignupForm({ redirectUrl = '/' }: SignupFormProps) {
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="email"><Trans>Email</Trans></Label>
+              <Label htmlFor="email">
+                <Trans>Email</Trans>
+              </Label>
               <Input
                 id="email"
                 name="email"
@@ -109,7 +113,9 @@ export function SignupForm({ redirectUrl = '/' }: SignupFormProps) {
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="password"><Trans>Password</Trans></Label>
+              <Label htmlFor="password">
+                <Trans>Password</Trans>
+              </Label>
               <Input
                 id="password"
                 name="password"
