@@ -1,3 +1,4 @@
+// biome-ignore lint/performance/noNamespaceImport: Radix UI requires namespace imports
 import * as SwitchPrimitive from '@radix-ui/react-switch';
 import type * as React from 'react';
 

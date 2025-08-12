@@ -1,5 +1,6 @@
-import { createFileRoute, Link, redirect } from '@tanstack/react-router';
 import { useQuery } from '@tanstack/react-query';
+import { createFileRoute, Link, redirect } from '@tanstack/react-router';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -8,13 +9,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { orpc } from '@/lib/orpc/client';
 import authClient from '@/lib/auth/auth-client';
+import { orpc } from '@/lib/orpc/client';
 
 export const Route = createFileRoute('/dashboard')({
-  beforeLoad: async ({ context }) => {
+  beforeLoad: ({ context }) => {
     if (!context.user) {
       throw redirect({
         to: '/auth/login',
@@ -63,11 +63,11 @@ function DashboardPage() {
       <div className="container mx-auto px-4 py-16">
         {/* Header */}
         <div className="mb-8 text-center">
-          <Badge variant="outline" className="mb-4">
+          <Badge className="mb-4" variant="outline">
             Protected Route
           </Badge>
-          <h1 className="mb-2 text-4xl font-bold text-slate-900">Dashboard</h1>
-          <p className="text-xl text-slate-600">
+          <h1 className="mb-2 font-bold text-4xl text-slate-900">Dashboard</h1>
+          <p className="text-slate-600 text-xl">
             Welcome back, {user.name}! 👋
           </p>
         </div>
@@ -82,22 +82,22 @@ function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Name:</span>
-                <span className="text-sm text-slate-600">{user.name}</span>
+              <div className="flex items-center justify-between">
+                <span className="font-medium text-sm">Name:</span>
+                <span className="text-slate-600 text-sm">{user.name}</span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Email:</span>
-                <span className="text-sm text-slate-600">{user.email}</span>
+              <div className="flex items-center justify-between">
+                <span className="font-medium text-sm">Email:</span>
+                <span className="text-slate-600 text-sm">{user.email}</span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">User ID:</span>
-                <span className="text-sm text-slate-600 font-mono">
+              <div className="flex items-center justify-between">
+                <span className="font-medium text-sm">User ID:</span>
+                <span className="font-mono text-slate-600 text-sm">
                   {user.id}
                 </span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Email Verified:</span>
+              <div className="flex items-center justify-between">
+                <span className="font-medium text-sm">Email Verified:</span>
                 <Badge variant={user.emailVerified ? 'default' : 'secondary'}>
                   {user.emailVerified ? 'Verified' : 'Not Verified'}
                 </Badge>
@@ -118,12 +118,12 @@ function DashboardPage() {
             <CardContent>
               <div className="space-y-4">
                 <div className="rounded-lg bg-slate-100 p-4">
-                  <p className="text-sm font-medium mb-2">Server Message:</p>
-                  <p className="text-sm text-slate-600">
+                  <p className="mb-2 font-medium text-sm">Server Message:</p>
+                  <p className="text-slate-600 text-sm">
                     {privateData.message}
                   </p>
                 </div>
-                <div className="text-xs text-slate-500">
+                <div className="text-slate-500 text-xs">
                   This data is only accessible to authenticated users via the{' '}
                   <code className="rounded bg-slate-200 px-1">
                     protectedProcedure
@@ -143,12 +143,12 @@ function DashboardPage() {
           <CardContent>
             <div className="grid gap-4 sm:grid-cols-2">
               <Link to="/demo/orpc-todo">
-                <Button variant="outline" className="w-full">
+                <Button className="w-full" variant="outline">
                   📋 View Todos
                 </Button>
               </Link>
               <Link to="/demo/form/simple">
-                <Button variant="outline" className="w-full">
+                <Button className="w-full" variant="outline">
                   📝 Try Forms
                 </Button>
               </Link>
@@ -157,7 +157,7 @@ function DashboardPage() {
             <Separator className="my-6" />
 
             <div className="flex justify-center">
-              <Button variant="destructive" onClick={handleSignOut}>
+              <Button onClick={handleSignOut} variant="destructive">
                 Sign Out
               </Button>
             </div>

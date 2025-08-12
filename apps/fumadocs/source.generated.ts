@@ -4,18 +4,18 @@ import type * as Config from './source.config';
 
 export const create = fromConfig<typeof Config>();
 
-export const docs = create.docs("docs", {
-  doc: import.meta.glob(["./**/*.{mdx,md}"], {
-    "query": {
-      "collection": "docs"
+export const docs = create.docs('docs', {
+  doc: import.meta.glob(['./**/*.{mdx,md}'], {
+    query: {
+      collection: 'docs',
     },
-    "base": "/content"
+    base: '/content',
   }),
-  meta: import.meta.glob(["./**/*.{json,yaml}"], {
-    "query": {
-      "collection": "docs"
+  meta: import.meta.glob(['./**/*.{json,yaml}'], {
+    query: {
+      collection: 'docs',
     },
-    "base": "/content",
-    "import": "default"
-  })
+    base: '/content',
+    import: 'default',
+  }),
 });

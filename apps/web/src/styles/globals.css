@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/nursery/noUnknownAtRule: Tailwind CSS directives */
 @import "tailwindcss";
 
 @import "tw-animate-css";
@@ -132,6 +133,7 @@ code {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

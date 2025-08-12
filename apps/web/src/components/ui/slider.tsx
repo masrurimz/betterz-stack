@@ -1,7 +1,9 @@
 'use client';
 
+// biome-ignore lint/performance/noNamespaceImport: Radix UI requires namespace imports
 import * as SliderPrimitive from '@radix-ui/react-slider';
-import * as React from 'react';
+import type { ComponentProps } from 'react';
+import { useMemo } from 'react';
 
 import { cn } from '@/lib/utils';
 
@@ -12,16 +14,16 @@ function Slider({
   min = 0,
   max = 100,
   ...props
-}: React.ComponentProps<typeof SliderPrimitive.Root>) {
-  const _values = React.useMemo(
-    () =>
-      Array.isArray(value)
-        ? value
-        : Array.isArray(defaultValue)
-          ? defaultValue
-          : [min, max],
-    [value, defaultValue, min, max]
-  );
+}: ComponentProps<typeof SliderPrimitive.Root>) {
+  const _values = useMemo(() => {
+    if (Array.isArray(value)) {
+      return value;
+    }
+    if (Array.isArray(defaultValue)) {
+      return defaultValue;
+    }
+    return [min, max];
+  }, [value, defaultValue, min, max]);
 
   return (
     <SliderPrimitive.Root
@@ -49,11 +51,11 @@ function Slider({
           data-slot="slider-range"
         />
       </SliderPrimitive.Track>
-      {Array.from({ length: _values.length }, (_, index) => (
+      {_values.map((sliderValue, _index) => (
         <SliderPrimitive.Thumb
           className="block size-4 shrink-0 rounded-full border border-primary bg-background shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:outline-hidden focus-visible:ring-4 disabled:pointer-events-none disabled:opacity-50"
           data-slot="slider-thumb"
-          key={index}
+          key={`thumb-${sliderValue}`}
         />
       ))}
     </SliderPrimitive.Root>

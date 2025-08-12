@@ -1,7 +1,7 @@
 import { createFormHook } from '@tanstack/react-form';
 
 import {
-  Select,
+  SelectForm as Select,
   SubscribeButton,
   TextArea,
   TextField,

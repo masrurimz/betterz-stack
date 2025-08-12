@@ -52,9 +52,7 @@ export async function dynamicActivate(i18n: I18n, locale: string) {
     try {
       const catalog = await importFn();
       return catalog.messages || {};
-    } catch (error) {
-      // If a catalog doesn't exist, return empty messages
-      console.warn(`Failed to load catalog for locale ${locale}:`, error);
+    } catch (_error) {
       return {};
     }
   });
@@ -62,9 +60,7 @@ export async function dynamicActivate(i18n: I18n, locale: string) {
   const allCatalogs = await Promise.all(catalogPromises);
 
   // Merge all catalogs into single messages object
-  const mergedMessages = allCatalogs.reduce((acc, messages) => {
-    return { ...acc, ...messages };
-  }, {});
+  const mergedMessages = Object.assign({}, ...allCatalogs);
 
   // Load and activate with merged translations
   i18n.loadAndActivate({ locale, messages: mergedMessages });

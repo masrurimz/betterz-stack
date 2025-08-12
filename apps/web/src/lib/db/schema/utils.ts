@@ -8,7 +8,9 @@
  */
 export function generateUUID(): string {
   // Handle test environment where Bun global might not be available
+  // biome-ignore lint/correctness/noUndeclaredVariables: Bun is a global in Bun runtime
   if (typeof Bun !== 'undefined' && Bun.randomUUIDv7) {
+    // biome-ignore lint/correctness/noUndeclaredVariables: Bun is a global in Bun runtime
     return Bun.randomUUIDv7();
   }
   // Fallback for test environment

@@ -5,7 +5,7 @@ import { reactStartCookies } from 'better-auth/react-start';
 import { env } from '../../env/server';
 import { db } from '../db';
 import { generateUUID } from '../db/schema';
-import { user, session, account, verification } from '../db/schema/auth';
+import { account, session, user, verification } from '../db/schema/auth';
 
 const getAuthConfig = serverOnly(() =>
   betterAuth({

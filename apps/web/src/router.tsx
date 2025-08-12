@@ -1,8 +1,8 @@
 import type { I18n } from '@lingui/core';
 import { createRouter as createTanstackRouter } from '@tanstack/react-router';
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query';
-import { getContext } from './lib/tanstack-query/root-provider';
 import { routerWithLingui } from './lib/lingui/i18n-router-plugin';
+import { getContext } from './lib/tanstack-query/root-provider';
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
 

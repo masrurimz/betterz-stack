@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -7,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -21,11 +21,11 @@ function HomePage() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-16 text-center">
         <div className="mx-auto max-w-4xl">
-          <Badge variant="secondary" className="mb-4">
+          <Badge className="mb-4" variant="secondary">
             Better-T-Stack
           </Badge>
 
-          <h1 className="mb-6 text-5xl font-bold text-slate-900 md:text-6xl">
+          <h1 className="mb-6 font-bold text-5xl text-slate-900 md:text-6xl">
             Full-Stack
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               {' '}
@@ -34,7 +34,7 @@ function HomePage() {
             Starter
           </h1>
 
-          <p className="mb-8 text-xl text-slate-600 md:text-2xl">
+          <p className="mb-8 text-slate-600 text-xl md:text-2xl">
             Built with TanStack Start, Better Auth, oRPC, and Shadcn UI.
             Everything you need for modern full-stack development.
           </p>
@@ -43,15 +43,15 @@ function HomePage() {
             {user ? (
               <>
                 <Link to="/dashboard">
-                  <Button size="lg" className="w-full sm:w-auto">
+                  <Button className="w-full sm:w-auto" size="lg">
                     Go to Dashboard
                   </Button>
                 </Link>
                 <Link to="/demo/orpc-todo">
                   <Button
-                    variant="outline"
-                    size="lg"
                     className="w-full sm:w-auto"
+                    size="lg"
+                    variant="outline"
                   >
                     View Todos
                   </Button>
@@ -60,15 +60,15 @@ function HomePage() {
             ) : (
               <>
                 <Link to="/auth/signup">
-                  <Button size="lg" className="w-full sm:w-auto">
+                  <Button className="w-full sm:w-auto" size="lg">
                     Get Started
                   </Button>
                 </Link>
                 <Link to="/auth/login">
                   <Button
-                    variant="outline"
-                    size="lg"
                     className="w-full sm:w-auto"
+                    size="lg"
+                    variant="outline"
                   >
                     Sign In
                   </Button>
@@ -81,7 +81,7 @@ function HomePage() {
 
       {/* Features Section */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="mb-12 text-center text-3xl font-bold text-slate-900">
+        <h2 className="mb-12 text-center font-bold text-3xl text-slate-900">
           What's Included
         </h2>
 
@@ -96,7 +96,7 @@ function HomePage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-slate-600">
+              <p className="text-slate-600 text-sm">
                 Secure user management with session handling, email
                 verification, and social login support.
               </p>
@@ -111,7 +111,7 @@ function HomePage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-slate-600">
+              <p className="text-slate-600 text-sm">
                 End-to-end type safety from server to client with automatic API
                 generation.
               </p>
@@ -128,7 +128,7 @@ function HomePage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-slate-600">
+              <p className="text-slate-600 text-sm">
                 Copy-paste components with Tailwind CSS styling and full
                 accessibility support.
               </p>
@@ -145,7 +145,7 @@ function HomePage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-slate-600">
+              <p className="text-slate-600 text-sm">
                 Smart caching, background updates, and optimistic UI updates out
                 of the box.
               </p>
@@ -162,7 +162,7 @@ function HomePage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-slate-600">
+              <p className="text-slate-600 text-sm">
                 Automatic route generation with full TypeScript support and
                 nested layouts.
               </p>
@@ -179,7 +179,7 @@ function HomePage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-slate-600">
+              <p className="text-slate-600 text-sm">
                 Organized code structure with domain, API, and component layers.
               </p>
             </CardContent>

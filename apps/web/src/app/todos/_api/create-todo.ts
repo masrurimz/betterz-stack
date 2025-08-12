@@ -1,4 +1,4 @@
-import * as z from 'zod';
+import { z } from 'zod';
 import { todo } from '@/lib/db/schema/todo';
 import { publicProcedure } from '@/lib/orpc';
 

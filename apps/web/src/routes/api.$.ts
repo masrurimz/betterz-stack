@@ -6,14 +6,14 @@ import { OpenAPIReferencePlugin } from '@orpc/openapi/plugins';
 import { onError } from '@orpc/server';
 import { ZodToJsonSchemaConverter } from '@orpc/zod/zod4';
 import { createServerFileRoute } from '@tanstack/react-start/server';
+import { createContext } from '@/lib/context';
 import router from '@/lib/orpc/router';
 import { TodoSchema } from '@/lib/orpc/schema';
-import { createContext } from '@/lib/context';
 
 const handler = new OpenAPIHandler(router, {
   interceptors: [
-    onError((error) => {
-      console.error(error);
+    onError((_error) => {
+      // TODO: Add proper error handling
     }),
   ],
   plugins: [

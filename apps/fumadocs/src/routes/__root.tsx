@@ -5,10 +5,10 @@ import {
   Outlet,
   Scripts,
 } from '@tanstack/react-router';
-import * as React from 'react';
-import appCss from '~/styles/app.css?url';
-import { RootProvider } from 'fumadocs-ui/provider/base';
 import { TanstackProvider } from 'fumadocs-core/framework/tanstack';
+import { RootProvider } from 'fumadocs-ui/provider/base';
+import type * as React from 'react';
+import appCss from '~/styles/app.css?url';
 
 export const Route = createRootRoute({
   head: () => ({
@@ -39,11 +39,12 @@ function RootComponent() {
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
+      {/* biome-ignore lint/style/noHeadElement: TanStack Router requires head element */}
       <head>
         <HeadContent />
       </head>
-      <body className="flex flex-col min-h-screen">
+      <body className="flex min-h-screen flex-col">
         <TanstackProvider>
           <RootProvider>{children}</RootProvider>
         </TanstackProvider>

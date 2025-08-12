@@ -22,6 +22,7 @@ function SimpleForm() {
       onBlur: schema,
     },
     onSubmit: ({ value }) => {
+      // biome-ignore lint/suspicious/noConsole: for demo purpose
       console.log(value);
       // Show success message
       alert('Form submitted successfully!');

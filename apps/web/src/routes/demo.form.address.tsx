@@ -2,6 +2,11 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { useAppForm } from '../app/demo/_hooks/form';
 
+// Regex patterns defined at module level for performance
+const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+const ZIP_CODE_REGEX = /^\d{5}(-\d{4})?$/;
+const PHONE_REGEX = /^(\+\d{1,3})?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+
 export const Route = createFileRoute('/demo/form/address')({
   component: AddressForm,
 });
@@ -34,6 +39,7 @@ function AddressForm() {
       },
     },
     onSubmit: ({ value }) => {
+      // biome-ignore lint/suspicious/noConsole: need for demo purpose
       console.log(value);
       // Show success message
       alert('Form submitted successfully!');
@@ -68,7 +74,7 @@ function AddressForm() {
                 if (!value || value.trim().length === 0) {
                   return 'Email is required';
                 }
-                if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+                if (!EMAIL_REGEX.test(value)) {
                   return 'Invalid email address';
                 }
                 return;
@@ -126,7 +132,7 @@ function AddressForm() {
                   if (!value || value.trim().length === 0) {
                     return 'Zip code is required';
                   }
-                  if (!/^\d{5}(-\d{4})?$/.test(value)) {
+                  if (!ZIP_CODE_REGEX.test(value)) {
                     return 'Invalid zip code format';
                   }
                   return;
@@ -172,11 +178,7 @@ function AddressForm() {
                 if (!value || value.trim().length === 0) {
                   return 'Phone number is required';
                 }
-                if (
-                  !/^(\+\d{1,3})?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(
-                    value
-                  )
-                ) {
+                if (!PHONE_REGEX.test(value)) {
                   return 'Invalid phone number format';
                 }
                 return;

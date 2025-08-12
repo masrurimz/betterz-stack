@@ -6,7 +6,6 @@ import {
   Outlet,
   retainSearchParams,
   Scripts,
-  useSearch,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { z } from 'zod';

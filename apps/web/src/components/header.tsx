@@ -1,7 +1,7 @@
 import { Link, useRouterState } from '@tanstack/react-router';
+import LanguageSwitcher from '@/components/language-switcher';
 import { Button } from '@/components/ui/button';
 import authClient from '@/lib/auth/auth-client';
-import LanguageSwitcher from '@/components/language-switcher';
 
 export default function Header() {
   const routerState = useRouterState();
@@ -43,19 +43,19 @@ export default function Header() {
         {user ? (
           <>
             <Link to="/dashboard">
-              <Button variant="ghost" size="sm">
+              <Button size="sm" variant="ghost">
                 Dashboard
               </Button>
             </Link>
             <span className="text-sm">Welcome, {user.name}!</span>
-            <Button variant="outline" size="sm" onClick={handleSignOut}>
+            <Button onClick={handleSignOut} size="sm" variant="outline">
               Sign Out
             </Button>
           </>
         ) : (
           <>
             <Link to="/auth/login">
-              <Button variant="outline" size="sm">
+              <Button size="sm" variant="outline">
                 Sign In
               </Button>
             </Link>

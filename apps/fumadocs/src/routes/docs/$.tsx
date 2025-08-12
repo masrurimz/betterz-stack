@@ -1,18 +1,18 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
-import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import { createServerFn } from '@tanstack/react-start';
-import { source } from '~/lib/source';
 import type { PageTree } from 'fumadocs-core/server';
-import { useMemo } from 'react';
-import { docs } from '../../../source.generated';
+import { createClientLoader } from 'fumadocs-mdx/runtime/vite';
+import { DocsLayout } from 'fumadocs-ui/layouts/docs';
+import defaultMdxComponents from 'fumadocs-ui/mdx';
 import {
   DocsBody,
   DocsDescription,
   DocsPage,
   DocsTitle,
 } from 'fumadocs-ui/page';
-import defaultMdxComponents from 'fumadocs-ui/mdx';
-import { createClientLoader } from 'fumadocs-mdx/runtime/vite';
+import { useMemo } from 'react';
+import { source } from '~/lib/source';
+import { docs } from '../../../source.generated';
 
 export const Route = createFileRoute('/docs/$')({
   component: Page,
@@ -28,9 +28,11 @@ const loader = createServerFn({
   method: 'GET',
 })
   .validator((slugs: string[]) => slugs)
-  .handler(async ({ data: slugs }) => {
+  .handler(({ data: slugs }) => {
     const page = source.getPage(slugs);
-    if (!page) throw notFound();
+    if (!page) {
+      throw notFound();
+    }
 
     return {
       tree: source.pageTree as object,
@@ -62,15 +64,15 @@ function Page() {
   const Content = clientLoader.getComponent(data.path);
   const tree = useMemo(
     () => transformPageTree(data.tree as PageTree.Folder),
-    [data.tree],
+    [data.tree]
   );
 
   return (
     <DocsLayout
-      tree={tree}
       nav={{
         title: 'Fumadocs Tanstack',
       }}
+      tree={tree}
     >
       <Content />
     </DocsLayout>
@@ -79,12 +81,15 @@ function Page() {
 
 function transformPageTree(tree: PageTree.Folder): PageTree.Folder {
   function page(item: PageTree.Item) {
-    if (typeof item.icon !== 'string') return item;
+    if (typeof item.icon !== 'string') {
+      return item;
+    }
 
     return {
       ...item,
       icon: (
         <span
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: fumadocs icon rendering
           dangerouslySetInnerHTML={{
             __html: item.icon,
           }}
@@ -97,8 +102,12 @@ function transformPageTree(tree: PageTree.Folder): PageTree.Folder {
     ...tree,
     index: tree.index ? page(tree.index) : undefined,
     children: tree.children.map((item) => {
-      if (item.type === 'page') return page(item);
-      if (item.type === 'folder') return transformPageTree(item);
+      if (item.type === 'page') {
+        return page(item);
+      }
+      if (item.type === 'folder') {
+        return transformPageTree(item);
+      }
       return item;
     }),
   };
