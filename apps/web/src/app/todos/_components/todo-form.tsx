@@ -1,5 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Plus } from 'lucide-react';
 import { useCallback, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { orpc } from '@/orpc/client';
 
 export function TodoForm() {
@@ -24,9 +27,9 @@ export function TodoForm() {
   }, [createTodo, todo]);
 
   return (
-    <div className="flex flex-col gap-2">
-      <input
-        className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/60 backdrop-blur-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-400"
+    <div className="flex gap-2">
+      <Input
+        className="flex-1 border-white/20 bg-white/10 text-white placeholder-white/60 backdrop-blur-sm focus:border-blue-400"
         onChange={(e) => setTodo(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
@@ -37,13 +40,14 @@ export function TodoForm() {
         type="text"
         value={todo}
       />
-      <button
-        className="rounded-lg bg-blue-500 px-4 py-3 font-bold text-white transition-colors hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-blue-500/50"
+      <Button
+        className="bg-blue-500 text-white hover:bg-blue-600"
         disabled={todo.trim().length === 0}
         onClick={submitTodo}
       >
-        Add todo
-      </button>
+        <Plus className="mr-1 h-4 w-4" />
+        Add
+      </Button>
     </div>
   );
 }
