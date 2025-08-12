@@ -4,7 +4,7 @@ import { todo } from '@/lib/db/schema/todo';
 import { publicProcedure } from '@/lib/orpc';
 
 export const toggleTodo = publicProcedure
-  .input(z.object({ id: z.string().uuid(), completed: z.boolean() }))
+  .input(z.object({ id: z.uuid(), completed: z.boolean() }))
   .handler(async ({ input, context }) => {
     const [updatedTodo] = await context.db
       .update(todo)
