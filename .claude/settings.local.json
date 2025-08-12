@@ -8,7 +8,9 @@
       "mcp__context7__resolve-library-id",
       "mcp__context7__get-library-docs",
       "Bash(grep:*)",
-      "Bash(bun run:*)"
+      "Bash(bun run:*)",
+      "mcp__serena__find_file",
+      "mcp__serena__search_for_pattern"
     ],
     "deny": [],
     "additionalDirectories": [
