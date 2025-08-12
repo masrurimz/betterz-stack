@@ -8,24 +8,33 @@ import {
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import Header from '../components/header';
-import TanStackQueryLayout from '../lib/tanstack-query/layout.tsx';
-import { getUser } from '../lib/auth/functions/getUser';
+import { orpc } from '../lib/orpc/client';
+import TanStackQueryLayout from '../lib/tanstack-query/layout';
 import appCss from '../styles/globals.css?url';
 
 interface MyRouterContext {
   queryClient: QueryClient;
   i18n: I18n;
-  user: Awaited<ReturnType<typeof getUser>>;
+  user: Awaited<ReturnType<typeof orpc.auth.getSession>>['user'];
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   beforeLoad: async ({ context }) => {
-    const user = await context.queryClient.ensureQueryData({
-      queryKey: ['user'],
-      queryFn: () => getUser(),
-      revalidateIfStale: true,
-    });
-    return { user };
+    /**
+     * Load user session using unified oRPC architecture
+     *
+     * This approach provides several benefits:
+     * - Unified caching with TanStack Query for all auth state
+     * - Type-safe session data from Better Auth through oRPC
+     * - Single pattern for all data loading (no mixed createServerFn)
+     * - Better performance through optimized React Query caching
+     */
+    const session = await context.queryClient.ensureQueryData(
+      orpc.auth.getSession.queryOptions({
+        input: {},
+      })
+    );
+    return { user: session?.user || null };
   },
   head: () => ({
     meta: [
