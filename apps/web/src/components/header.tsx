@@ -45,6 +45,11 @@ export default function Header() {
       <div className="flex items-center gap-2">
         {user ? (
           <>
+            <Link to="/dashboard">
+              <Button variant="ghost" size="sm">
+                Dashboard
+              </Button>
+            </Link>
             <span className="text-sm">Welcome, {user.name}!</span>
             <Button variant="outline" size="sm" onClick={handleSignOut}>
               Sign Out
