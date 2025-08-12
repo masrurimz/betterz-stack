@@ -34,10 +34,38 @@ export function getClientLocale(): string {
 }
 
 /**
- * We do a dynamic import of just the catalog that we need
+ * Auto-discover and load all translation catalogs (global + all features)
  * @param locale any locale string
  */
 export async function dynamicActivate(i18n: I18n, locale: string) {
-  const { messages } = await import(`../../locales/${locale}/messages.po`);
-  i18n.loadAndActivate({ locale, messages });
+  // Define all catalogs to load
+  const catalogs = [
+    // Global translations (header, common UI)
+    () => import(`../../locales/${locale}/messages.po`),
+    // Feature-specific translations
+    () => import(`../../app/auth/_locales/${locale}.po`),
+    () => import(`../../app/todos/_locales/${locale}.po`),
+  ];
+
+  // Load all catalogs in parallel
+  const catalogPromises = catalogs.map(async (importFn) => {
+    try {
+      const catalog = await importFn();
+      return catalog.messages || {};
+    } catch (error) {
+      // If a catalog doesn't exist, return empty messages
+      console.warn(`Failed to load catalog for locale ${locale}:`, error);
+      return {};
+    }
+  });
+
+  const allCatalogs = await Promise.all(catalogPromises);
+  
+  // Merge all catalogs into single messages object
+  const mergedMessages = allCatalogs.reduce((acc, messages) => {
+    return { ...acc, ...messages };
+  }, {});
+
+  // Load and activate with merged translations
+  i18n.loadAndActivate({ locale, messages: mergedMessages });
 }

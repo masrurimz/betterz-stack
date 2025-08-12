@@ -1,0 +1,38 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-01-10 10:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/app/todos/_components/todo-form.tsx
+msgid "Add"
+msgstr "Add"
+
+#: src/app/todos/_components/todo-list.tsx
+msgid "Deleting..."
+msgstr "Deleting..."
+
+#: src/app/todos/_components/todo-form.tsx
+msgid "Enter a new todo..."
+msgstr "Enter a new todo..."
+
+#: src/app/todos/_components/todo-list.tsx
+msgid "Loading todos..."
+msgstr "Loading todos..."
+
+#: src/app/todos/_components/todo-list.tsx
+msgid "No todos yet. Add one above!"
+msgstr "No todos yet. Add one above!"
+
+#: src/app/todos/_components/todo-list.tsx
+msgid "Updating..."
+msgstr "Updating..."

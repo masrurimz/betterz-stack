@@ -1,0 +1,98 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2025-01-10 10:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/app/auth/_components/signup-form.tsx
+msgid "Already have an account? <0>Sign in</0>"
+msgstr "Already have an account? <0>Sign in</0>"
+
+#: src/app/auth/_components/signup-form.tsx
+msgid "Create a strong password"
+msgstr "Create a strong password"
+
+#: src/app/auth/_components/signup-form.tsx
+msgid "Create account"
+msgstr "Create account"
+
+#: src/app/auth/_components/signup-form.tsx
+msgid "Create your Betterz Stack account"
+msgstr "Create your Betterz Stack account"
+
+#: src/app/auth/_components/signup-form.tsx
+msgid "Creating account..."
+msgstr "Creating account..."
+
+#: src/app/auth/_components/login-form.tsx
+msgid "Don't have an account? <0>Sign up</0>"
+msgstr "Don't have an account? <0>Sign up</0>"
+
+#: src/app/auth/_components/login-form.tsx
+#: src/app/auth/_components/signup-form.tsx
+msgid "Email"
+msgstr "Email"
+
+#: src/app/auth/_components/login-form.tsx
+msgid "Enter password here"
+msgstr "Enter password here"
+
+#: src/app/auth/_components/login-form.tsx
+#: src/app/auth/_components/signup-form.tsx
+msgid "hello@example.com"
+msgstr "hello@example.com"
+
+#: src/app/auth/_components/signup-form.tsx
+msgid "John Doe"
+msgstr "John Doe"
+
+#: src/app/auth/_components/login-form.tsx
+msgid "Logging in..."
+msgstr "Logging in..."
+
+#: src/app/auth/_components/login-form.tsx
+msgid "Login"
+msgstr "Login"
+
+#: src/app/auth/_components/login-form.tsx
+msgid "Login with GitHub"
+msgstr "Login with GitHub"
+
+#: src/app/auth/_components/login-form.tsx
+msgid "Login with Google"
+msgstr "Login with Google"
+
+#: src/app/auth/_components/signup-form.tsx
+msgid "Name"
+msgstr "Name"
+
+#: src/app/auth/_components/login-form.tsx
+#: src/app/auth/_components/signup-form.tsx
+msgid "Or"
+msgstr "Or"
+
+#: src/app/auth/_components/login-form.tsx
+#: src/app/auth/_components/signup-form.tsx
+msgid "Password"
+msgstr "Password"
+
+#: src/app/auth/_components/signup-form.tsx
+msgid "Sign up with GitHub"
+msgstr "Sign up with GitHub"
+
+#: src/app/auth/_components/signup-form.tsx
+msgid "Sign up with Google"
+msgstr "Sign up with Google"
+
+#: src/app/auth/_components/login-form.tsx
+msgid "Welcome back to Betterz Stack"
+msgstr "Welcome back to Betterz Stack"
