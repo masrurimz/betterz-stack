@@ -1,19 +1,14 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
-import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { getUser } from '@/lib/auth/functions/getUser';
 
 export const Route = createFileRoute('/')({
   component: HomePage,
 });
 
 function HomePage() {
-  const { data: user } = useQuery({
-    queryKey: ['user'],
-    queryFn: () => getUser(),
-  });
+  const { user } = Route.useRouteContext();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">

@@ -4,14 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { getUser } from '@/lib/auth/functions/getUser';
 import { orpc } from '@/lib/orpc/client';
 import authClient from '@/lib/auth/auth-client';
 
 export const Route = createFileRoute('/dashboard')({
-  beforeLoad: async () => {
-    const user = await getUser();
-    if (!user) {
+  beforeLoad: async ({ context }) => {
+    if (!context.user) {
       throw redirect({
         to: '/auth/login',
         search: {
@@ -24,14 +22,13 @@ export const Route = createFileRoute('/dashboard')({
 });
 
 function DashboardPage() {
-  const { data: user } = useQuery({
-    queryKey: ['user'],
-    queryFn: () => getUser(),
-  });
+  const { user } = Route.useRouteContext();
 
-  const { data: privateData } = orpc.privateData.useQuery({
-    input: {},
-  });
+  const { data: privateData } = useQuery(
+    orpc.privateData.queryOptions({
+      input: {},
+    })
+  );
 
   const handleSignOut = () => {
     authClient.signOut({

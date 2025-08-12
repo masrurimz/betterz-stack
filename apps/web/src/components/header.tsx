@@ -1,14 +1,10 @@
-import { Link } from '@tanstack/react-router';
-import { useQuery } from '@tanstack/react-query';
+import { Link, useRouterState } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
-import { getUser } from '@/lib/auth/functions/getUser';
 import authClient from '@/lib/auth/auth-client';
 
 export default function Header() {
-  const { data: user } = useQuery({
-    queryKey: ['user'],
-    queryFn: () => getUser(),
-  });
+  const routerState = useRouterState();
+  const user = routerState.location.state?.user || routerState.matches?.[0]?.context?.user;
 
   const handleSignOut = () => {
     authClient.signOut({

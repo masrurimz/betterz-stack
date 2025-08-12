@@ -9,14 +9,24 @@ import {
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import Header from '../components/header';
 import TanStackQueryLayout from '../lib/tanstack-query/layout.tsx';
+import { getUser } from '../lib/auth/functions/getUser';
 import appCss from '../styles/globals.css?url';
 
 interface MyRouterContext {
   queryClient: QueryClient;
   i18n: I18n;
+  user: Awaited<ReturnType<typeof getUser>>;
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
+  beforeLoad: async ({ context }) => {
+    const user = await context.queryClient.ensureQueryData({
+      queryKey: ['user'],
+      queryFn: () => getUser(),
+      revalidateIfStale: true,
+    });
+    return { user };
+  },
   head: () => ({
     meta: [
       {
