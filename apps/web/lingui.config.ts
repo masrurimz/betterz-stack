@@ -9,7 +9,7 @@ export default defineConfig({
   catalogs: [
     // Global translations (header, common UI, shared components)
     {
-      path: '<rootDir>/src/locales/{locale}/messages',
+      path: '<rootDir>/src/locales/global-{locale}',
       include: [
         'src/components/**',
         'src/routes/**',
@@ -21,13 +21,13 @@ export default defineConfig({
     },
     // Auth feature translations
     {
-      path: '<rootDir>/src/app/auth/_locales/{locale}',
+      path: '<rootDir>/src/app/auth/_locales/auth-{locale}',
       include: ['src/app/auth/**'],
       exclude: ['**/node_modules/**'],
     },
     // Todos feature translations
     {
-      path: '<rootDir>/src/app/todos/_locales/{locale}',
+      path: '<rootDir>/src/app/todos/_locales/todos-{locale}',
       include: ['src/app/todos/**'],
       exclude: ['**/node_modules/**'],
     },

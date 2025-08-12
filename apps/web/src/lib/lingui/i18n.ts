@@ -41,10 +41,10 @@ export async function dynamicActivate(i18n: I18n, locale: string) {
   // Define all catalogs to load
   const catalogs = [
     // Global translations (header, common UI)
-    () => import(`../../locales/${locale}/messages.po`),
+    () => import(`../../locales/global-${locale}.po`),
     // Feature-specific translations
-    () => import(`../../app/auth/_locales/${locale}.po`),
-    () => import(`../../app/todos/_locales/${locale}.po`),
+    () => import(`../../app/auth/_locales/auth-${locale}.po`),
+    () => import(`../../app/todos/_locales/todos-${locale}.po`),
   ];
 
   // Load all catalogs in parallel

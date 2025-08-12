@@ -5,7 +5,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: en\n"
+"Language: id\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
@@ -15,27 +15,27 @@ msgstr ""
 
 #: src/app/auth/_components/signup-form.tsx
 msgid "Already have an account? <0>Sign in</0>"
-msgstr "Already have an account? <0>Sign in</0>"
+msgstr "Sudah punya akun? <0>Masuk</0>"
 
 #: src/app/auth/_components/signup-form.tsx
 msgid "Create a strong password"
-msgstr "Create a strong password"
+msgstr "Buat kata sandi yang kuat"
 
 #: src/app/auth/_components/signup-form.tsx
 msgid "Create account"
-msgstr "Create account"
+msgstr "Buat akun"
 
 #: src/app/auth/_components/signup-form.tsx
 msgid "Create your Betterz Stack account"
-msgstr "Create your Betterz Stack account"
+msgstr "Buat akun Betterz Stack Anda"
 
 #: src/app/auth/_components/signup-form.tsx
 msgid "Creating account..."
-msgstr "Creating account..."
+msgstr "Membuat akun..."
 
 #: src/app/auth/_components/login-form.tsx
 msgid "Don't have an account? <0>Sign up</0>"
-msgstr "Don't have an account? <0>Sign up</0>"
+msgstr "Belum punya akun? <0>Daftar</0>"
 
 #: src/app/auth/_components/login-form.tsx
 #: src/app/auth/_components/signup-form.tsx
@@ -44,12 +44,12 @@ msgstr "Email"
 
 #: src/app/auth/_components/login-form.tsx
 msgid "Enter password here"
-msgstr "Enter password here"
+msgstr "Masukkan kata sandi di sini"
 
 #: src/app/auth/_components/login-form.tsx
 #: src/app/auth/_components/signup-form.tsx
 msgid "hello@example.com"
-msgstr "hello@example.com"
+msgstr "halo@contoh.com"
 
 #: src/app/auth/_components/signup-form.tsx
 msgid "John Doe"
@@ -57,42 +57,42 @@ msgstr "John Doe"
 
 #: src/app/auth/_components/login-form.tsx
 msgid "Logging in..."
-msgstr "Logging in..."
+msgstr "Masuk..."
 
 #: src/app/auth/_components/login-form.tsx
 msgid "Login"
-msgstr "Login"
+msgstr "Masuk"
 
 #: src/app/auth/_components/login-form.tsx
 msgid "Login with GitHub"
-msgstr "Login with GitHub"
+msgstr "Masuk dengan GitHub"
 
 #: src/app/auth/_components/login-form.tsx
 msgid "Login with Google"
-msgstr "Login with Google"
+msgstr "Masuk dengan Google"
 
 #: src/app/auth/_components/signup-form.tsx
 msgid "Name"
-msgstr "Name"
+msgstr "Nama"
 
 #: src/app/auth/_components/login-form.tsx
 #: src/app/auth/_components/signup-form.tsx
 msgid "Or"
-msgstr "Or"
+msgstr "Atau"
 
 #: src/app/auth/_components/login-form.tsx
 #: src/app/auth/_components/signup-form.tsx
 msgid "Password"
-msgstr "Password"
+msgstr "Kata Sandi"
 
 #: src/app/auth/_components/signup-form.tsx
 msgid "Sign up with GitHub"
-msgstr "Sign up with GitHub"
+msgstr "Daftar dengan GitHub"
 
 #: src/app/auth/_components/signup-form.tsx
 msgid "Sign up with Google"
-msgstr "Sign up with Google"
+msgstr "Daftar dengan Google"
 
 #: src/app/auth/_components/login-form.tsx
 msgid "Welcome back to Betterz Stack"
-msgstr "Welcome back to Betterz Stack"
+msgstr "Selamat datang kembali di Betterz Stack"
